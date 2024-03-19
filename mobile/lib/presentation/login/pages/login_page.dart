@@ -2,10 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:mobile/presentation/shared/my_button.dart';
 import 'package:mobile/presentation/shared/my_text_field.dart';
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends StatefulWidget {
   const LoginPage({
     super.key,
   });
+
+  @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
+
+  String? isEmailText;
+  String? isPasswordText;
 
   @override
   Widget build(BuildContext context) {
@@ -27,33 +38,35 @@ class LoginPage extends StatelessWidget {
                   ),
             ),
             const SizedBox(height: 50),
-            Container(
-              color: Colors.green,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  ElevatedButton(
-                      onPressed: () {},
-                      child: const Row(
-                        children: [
-                          Icon(Icons.g_mobiledata),
-                          Text('Sign in with Google')
-                        ],
-                      )),
-                  ElevatedButton(onPressed: () {}, child: Text('F')),
-                  ElevatedButton(onPressed: () {}, child: Text('A')),
-                ],
-              ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                ElevatedButton(
+                    onPressed: () {},
+                    child: const Row(
+                      children: [
+                        Icon(Icons.g_mobiledata),
+                        Text('Sign in with Google')
+                      ],
+                    )),
+                ElevatedButton(onPressed: () {}, child: Text('F')),
+                ElevatedButton(onPressed: () {}, child: Text('A')),
+              ],
             ),
             const SizedBox(height: 50),
-            const MyTextField(
+            MyTextField(
               label: 'Enter you email address',
               hintText: 'user@example.com',
+              controller: _emailController,
+              errorText: isEmailText,
             ),
             const SizedBox(height: 30),
-            const MyTextField(
+            MyTextField(
               label: 'Enter you password',
               hintText: '*********',
+              isPassword: true,
+              controller: _passwordController,
+              errorText: isPasswordText,
             ),
             const SizedBox(height: 20),
             Align(
@@ -66,7 +79,19 @@ class LoginPage extends StatelessWidget {
             MyButton(
               child: 'Sign in ',
               ontap: () {
-                // traitment 1
+                final emailFormat =
+                    RegExp(r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$');
+                bool isMatch =
+                    emailFormat.hasMatch(_emailController.text.trim());
+
+                if (isMatch) {
+                  // bech naamel request mte3i
+                } else {
+                  // mehy valid
+                  setState(() {
+                    isEmailText = 'Email format non valid';
+                  });
+                }
               },
             ),
             Row(
