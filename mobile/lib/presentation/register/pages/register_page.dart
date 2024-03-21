@@ -1,21 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:mobile/core/config/image_manager.dart';
-import 'package:mobile/presentation/shared/my_button.dart';
-import 'package:mobile/presentation/shared/my_text_field.dart';
+import '../../shared/shared.dart';
 
-class LoginPage extends StatefulWidget {
-  const LoginPage({
-    super.key,
-  });
+class RegisterScreen extends StatefulWidget {
+  const RegisterScreen({super.key});
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  State<RegisterScreen> createState() => _RegisterScreenState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _RegisterScreenState extends State<RegisterScreen> {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
-
+  final _usernameController = TextEditingController();
+  final _contactNumberController = TextEditingController();
   String? isEmailText;
   String? isPasswordText;
 
@@ -34,45 +31,10 @@ class _LoginPageState extends State<LoginPage> {
                 style: Theme.of(context).textTheme.titleSmall,
               ),
               Text(
-                'Sign in',
+                'Sign up',
                 style: Theme.of(context).textTheme.titleLarge!.copyWith(
                       fontSize: 35,
                     ),
-              ),
-              const SizedBox(height: 50),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  ElevatedButton(
-                      onPressed: () {},
-                      child: Row(
-                        children: [
-                          Image.asset(
-                            ImageManager.google,
-                            height: 20,
-                            width: 20,
-                          ),
-                          const SizedBox(
-                            width: 10,
-                          ),
-                          const Text('Sign in with Google')
-                        ],
-                      )),
-                  ElevatedButton(
-                      onPressed: () {},
-                      child: Image.asset(
-                        ImageManager.facebook,
-                        height: 20,
-                        width: 20,
-                      )),
-                  ElevatedButton(
-                      onPressed: () {},
-                      child: Image.asset(
-                        ImageManager.apple,
-                        height: 20,
-                        width: 20,
-                      )),
-                ],
               ),
               const SizedBox(height: 50),
               MyTextField(
@@ -81,7 +43,26 @@ class _LoginPageState extends State<LoginPage> {
                 controller: _emailController,
                 errorText: isEmailText,
               ),
-              const SizedBox(height: 30),
+              Row(
+                children: [
+                  Expanded(
+                    child: MyTextField(
+                        label: 'enter your username',
+                        hintText: 'username',
+                        controller: _usernameController,
+                        errorText: null),
+                  ),
+                  const SizedBox(
+                    width: 20,
+                  ),
+                  Expanded(
+                      child: MyTextField(
+                          label: 'enter your contact number',
+                          hintText: 'contact number',
+                          controller: _contactNumberController,
+                          errorText: null))
+                ],
+              ),
               MyTextField(
                 label: 'Enter you password',
                 hintText: '*********',
@@ -90,15 +71,8 @@ class _LoginPageState extends State<LoginPage> {
                 errorText: isPasswordText,
               ),
               const SizedBox(height: 20),
-              Align(
-                alignment: Alignment.centerRight,
-                child: TextButton(
-                  onPressed: () {},
-                  child: const Text('Forgot Password ?'),
-                ),
-              ),
               MyButton(
-                child: 'Sign in ',
+                child: 'Sign up',
                 ontap: () {
                   final emailFormat = RegExp(
                       r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$');
@@ -118,12 +92,12 @@ class _LoginPageState extends State<LoginPage> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Text('No Account ? '),
+                  const Text('have an Account ? '),
                   TextButton(
                       onPressed: () {
-                        Navigator.of(context).pushNamed('/register');
+                        Navigator.of(context).pop();
                       },
-                      child: const Text('Sign up'))
+                      child: const Text('Sign in'))
                 ],
               )
             ],
@@ -131,5 +105,6 @@ class _LoginPageState extends State<LoginPage> {
         ),
       ),
     );
+    ;
   }
 }
