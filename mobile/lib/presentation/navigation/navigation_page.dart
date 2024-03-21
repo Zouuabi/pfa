@@ -26,7 +26,7 @@ class _NavigationPageState extends State<NavigationPage> {
             currentIndex = index;
           });
         },
-        children: [
+        children: const [
           FeedPage(),
           NotificationPage(),
           ProfilePage(),
@@ -43,7 +43,7 @@ class _NavigationPageState extends State<NavigationPage> {
                 curve: Curves.fastEaseInToSlowEaseOut);
           });
         },
-        items: [
+        items: const [
           BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
           BottomNavigationBarItem(icon: Icon(Icons.logo_dev), label: 'kech'),
           BottomNavigationBarItem(icon: Icon(Icons.abc), label: 'bch'),

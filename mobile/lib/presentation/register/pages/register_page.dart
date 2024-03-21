@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:mobile/core/helper/email_checker.dart';
+import 'package:mobile/core/helper/password_checker.dart';
+import 'package:mobile/presentation/register/verify/contact_number_checker.dart';
 import '../../shared/shared.dart';
 
 class RegisterScreen extends StatefulWidget {
@@ -13,8 +16,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
   final _passwordController = TextEditingController();
   final _usernameController = TextEditingController();
   final _contactNumberController = TextEditingController();
-  String? isEmailText;
-  String? isPasswordText;
+  String? emailErrorText;
+  String? passwordErrorText;
+  String? usernameErrorText;
+  String? contactErrorText;
 
   // todo : rakah l state management mte3 register
   // todo: me yelzam hatta champ fergh
@@ -45,7 +50,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 label: 'Enter you email address',
                 hintText: 'user@example.com',
                 controller: _emailController,
-                errorText: isEmailText,
+                errorText: emailErrorText,
               ),
               Row(
                 children: [
@@ -54,7 +59,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         label: 'enter your username',
                         hintText: 'username',
                         controller: _usernameController,
-                        errorText: null),
+                        errorText: usernameErrorText),
                   ),
                   const SizedBox(
                     width: 20,
@@ -64,7 +69,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           label: 'enter your contact number',
                           hintText: 'contact number',
                           controller: _contactNumberController,
-                          errorText: null))
+                          errorText: contactErrorText))
                 ],
               ),
               MyTextField(
@@ -72,32 +77,53 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 hintText: '*********',
                 isPassword: true,
                 controller: _passwordController,
-                errorText: isPasswordText,
+                errorText: passwordErrorText,
               ),
               const SizedBox(height: 20),
               MyButton(
                 child: 'Register',
                 ontap: () {
-                  //
-                  if (_usernameController.text.isEmpty) {
+                  setState(() {
+                    emailErrorText = null;
+                    passwordErrorText = null;
+                    usernameErrorText = null;
+                    contactErrorText = null;
+                  });
+                  bool isMatch = isEmailValid(email: _emailController.text);
+                  bool isPasswordMatch =
+                      isPasswordValid(password: _passwordController.text);
+                  bool error = false;
+
+                  if (!isMatch) {
+                    error = true;
                     setState(() {
-                      // nbadel state mte3l variable error li dekhl ll username field
+                      emailErrorText = 'Email format non valid';
                     });
                   }
 
-                  // todo: 3awedhha bl function
-                  final emailFormat = RegExp(
-                      r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$');
-                  bool isMatch =
-                      emailFormat.hasMatch(_emailController.text.trim());
-
-                  if (isMatch) {
-                    // bech naamel request mte3i
-                  } else {
-                    // mehy valid
+                  if (!isPasswordMatch) {
+                    error = true;
                     setState(() {
-                      isEmailText = 'Email format non valid';
+                      passwordErrorText = 'Password format non valid';
                     });
+                  }
+                  if (_usernameController.text.isEmpty) {
+                    error = true;
+                    setState(() {
+                      usernameErrorText = "username";
+                    });
+                  }
+
+                  bool isContactMatch =
+                      isContactValid(contact: _contactNumberController.text);
+                  if (!isContactMatch) {
+                    error = true;
+                    setState(() {
+                      contactErrorText = "contact number invalide";
+                    });
+                  }
+                  if (!error) {
+                    Navigator.of(context).pushReplacementNamed('/navigation');
                   }
                 },
               ),
