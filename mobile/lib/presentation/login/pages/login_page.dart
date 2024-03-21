@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mobile/core/config/image_manager.dart';
+import 'package:mobile/core/helper/email_checker.dart';
 import 'package:mobile/presentation/shared/my_button.dart';
 import 'package:mobile/presentation/shared/my_text_field.dart';
 
@@ -55,7 +56,7 @@ class _LoginPageState extends State<LoginPage> {
                           const SizedBox(
                             width: 10,
                           ),
-                          const Text('Sign in with Google')
+                          const Text('Continue with Google')
                         ],
                       )),
                   ElevatedButton(
@@ -98,15 +99,12 @@ class _LoginPageState extends State<LoginPage> {
                 ),
               ),
               MyButton(
-                child: 'Sign in ',
+                child: 'Login',
                 ontap: () {
-                  final emailFormat = RegExp(
-                      r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$');
-                  bool isMatch =
-                      emailFormat.hasMatch(_emailController.text.trim());
+                  bool isMatch = isEmailValid(email: _emailController.text);
 
                   if (isMatch) {
-                    // bech naamel request mte3i
+                    Navigator.of(context).pushReplacementNamed('/navigation');
                   } else {
                     // mehy valid
                     setState(() {
@@ -123,7 +121,7 @@ class _LoginPageState extends State<LoginPage> {
                       onPressed: () {
                         Navigator.of(context).pushNamed('/register');
                       },
-                      child: const Text('Sign up'))
+                      child: const Text('Register'))
                 ],
               )
             ],
