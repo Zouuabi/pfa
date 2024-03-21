@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mobile/presentation/navigation/navigation_page.dart';
 import 'package:mobile/presentation/register/pages/register_page.dart';
 
 import 'login/pages/login_page.dart';
@@ -15,10 +16,11 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.teal),
         useMaterial3: true,
       ),
-      home: const LoginPage(),
+      initialRoute: '/login',
       routes: {
         '/login': (BuildContext context) => const LoginPage(),
-        '/register': (BuildContext context) => const RegisterScreen()
+        '/register': (BuildContext context) => const RegisterScreen(),
+        '/navigation': (BuildContext context) => const NavigationPage(),
       },
     );
   }

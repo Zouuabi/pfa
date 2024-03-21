@@ -16,6 +16,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
   String? isEmailText;
   String? isPasswordText;
 
+  // todo : rakah l state management mte3 register
+  // todo: me yelzam hatta champ fergh
+  // todo : akl fonction mte3 check email
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -72,8 +76,16 @@ class _RegisterScreenState extends State<RegisterScreen> {
               ),
               const SizedBox(height: 20),
               MyButton(
-                child: 'Sign up',
+                child: 'Register',
                 ontap: () {
+                  //
+                  if (_usernameController.text.isEmpty) {
+                    setState(() {
+                      // nbadel state mte3l variable error li dekhl ll username field
+                    });
+                  }
+
+                  // todo: 3awedhha bl function
                   final emailFormat = RegExp(
                       r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$');
                   bool isMatch =
@@ -97,7 +109,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       onPressed: () {
                         Navigator.of(context).pop();
                       },
-                      child: const Text('Sign in'))
+                      child: const Text('Login'))
                 ],
               )
             ],
