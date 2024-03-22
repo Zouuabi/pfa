@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:mobile/core/helper/email_checker.dart';
 import 'package:mobile/core/helper/password_checker.dart';
 import 'package:mobile/presentation/register/verify/contact_number_checker.dart';
+import 'package:mobile/presentation/register/widgets/register_form.dart';
+import 'package:mobile/presentation/shared/app_welcome.dart';
 import '../../shared/shared.dart';
 
 class RegisterScreen extends StatefulWidget {
@@ -20,10 +22,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
   String? passwordErrorText;
   String? usernameErrorText;
   String? contactErrorText;
-
-  // todo : rakah l state management mte3 register
-  // todo: me yelzam hatta champ fergh
-  // todo : akl fonction mte3 check email
+  @override
+  void dispose() {
+    _emailController.dispose();
+    _passwordController.dispose();
+    _usernameController.dispose();
+    _contactNumberController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -32,20 +38,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 50),
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                'Welcome to TeamBey',
-                style: Theme.of(context).textTheme.titleSmall,
-              ),
-              Text(
-                'Sign up',
-                style: Theme.of(context).textTheme.titleLarge!.copyWith(
-                      fontSize: 35,
-                    ),
-              ),
-              const SizedBox(height: 50),
+              const Expanded(flex: 2, child: AppWelcome(child: 'Register')),
               MyTextField(
                 label: 'Enter you email address',
                 hintText: 'user@example.com',
@@ -79,70 +73,72 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 controller: _passwordController,
                 errorText: passwordErrorText,
               ),
-              const SizedBox(height: 20),
-              MyButton(
-                child: 'Register',
-                ontap: () {
-                  setState(() {
-                    emailErrorText = null;
-                    passwordErrorText = null;
-                    usernameErrorText = null;
-                    contactErrorText = null;
-                  });
-                  bool isMatch = isEmailValid(email: _emailController.text);
-                  bool isPasswordMatch =
-                      isPasswordValid(password: _passwordController.text);
-                  bool error = false;
+              Expanded(
+                child: MyButton(
+                  child: 'Register',
+                  ontap: () {
+                    setState(() {
+                      emailErrorText = null;
+                      passwordErrorText = null;
+                      usernameErrorText = null;
+                      contactErrorText = null;
+                    });
+                    bool isMatch = isEmailValid(email: _emailController.text);
+                    bool isPasswordMatch =
+                        isPasswordValid(password: _passwordController.text);
+                    bool error = false;
 
-                  if (!isMatch) {
-                    error = true;
-                    setState(() {
-                      emailErrorText = 'Email format non valid';
-                    });
-                  }
+                    if (!isMatch) {
+                      error = true;
+                      setState(() {
+                        emailErrorText = 'Email format non valid';
+                      });
+                    }
 
-                  if (!isPasswordMatch) {
-                    error = true;
-                    setState(() {
-                      passwordErrorText = 'Password format non valid';
-                    });
-                  }
-                  if (_usernameController.text.isEmpty) {
-                    error = true;
-                    setState(() {
-                      usernameErrorText = "username";
-                    });
-                  }
+                    if (!isPasswordMatch) {
+                      error = true;
+                      setState(() {
+                        passwordErrorText = 'Password format non valid';
+                      });
+                    }
+                    if (_usernameController.text.isEmpty) {
+                      error = true;
+                      setState(() {
+                        usernameErrorText = "username";
+                      });
+                    }
 
-                  bool isContactMatch =
-                      isContactValid(contact: _contactNumberController.text);
-                  if (!isContactMatch) {
-                    error = true;
-                    setState(() {
-                      contactErrorText = "contact number invalide";
-                    });
-                  }
-                  if (!error) {
-                    Navigator.of(context).pushReplacementNamed('/navigation');
-                  }
-                },
+                    bool isContactMatch =
+                        isContactValid(contact: _contactNumberController.text);
+                    if (!isContactMatch) {
+                      error = true;
+                      setState(() {
+                        contactErrorText = "contact number invalide";
+                      });
+                    }
+                    if (!error) {
+                      Navigator.of(context).pushReplacementNamed('/navigation');
+                    }
+                  },
+                ),
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const Text('have an Account ? '),
-                  TextButton(
-                      onPressed: () {
-                        Navigator.of(context).pop();
-                      },
-                      child: const Text('Login'))
-                ],
+              Expanded(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Text('have an Account ? '),
+                    TextButton(
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                        child: const Text('Login'))
+                  ],
+                ),
               )
             ],
           ),
         ),
       ),
     );
-    ;
   }
 }

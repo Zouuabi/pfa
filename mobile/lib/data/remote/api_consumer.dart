@@ -24,10 +24,6 @@ class ApiConsumer {
     // get the result in result var
     http.Response response = await client.get(Uri.parse(url));
 
-    response.headers;
-    response.body;
-    Map<String, dynamic>;  ==> LoginResponse
-
     // we must serialize the the result to from json to an adequat format get
 
     return;
@@ -48,7 +44,4 @@ class ApiConsumer {
   }
 }
 
-
-class LoginResponse {
-
-}
+class LoginResponse {}

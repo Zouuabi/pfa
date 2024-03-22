@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mobile/core/config/image_manager.dart';
 import 'package:mobile/core/helper/email_checker.dart';
+import 'package:mobile/presentation/shared/app_welcome.dart';
 import 'package:mobile/presentation/shared/my_button.dart';
 import 'package:mobile/presentation/shared/my_text_field.dart';
 
@@ -19,6 +20,12 @@ class _LoginPageState extends State<LoginPage> {
 
   String? isEmailText;
   String? isPasswordText;
+  @override
+  void dispose() {
+    super.dispose();
+    _emailController.dispose();
+    _passwordController.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -30,16 +37,7 @@ class _LoginPageState extends State<LoginPage> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                'Welcome to TeamBey',
-                style: Theme.of(context).textTheme.titleSmall,
-              ),
-              Text(
-                'Sign in',
-                style: Theme.of(context).textTheme.titleLarge!.copyWith(
-                      fontSize: 35,
-                    ),
-              ),
+              const AppWelcome(child: 'Login'),
               const SizedBox(height: 50),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
