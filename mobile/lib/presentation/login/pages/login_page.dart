@@ -15,16 +15,18 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  final _emailController = TextEditingController();
-  final _passwordController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController  _passwordController= TextEditingController();
 
   String? isEmailText;
   String? isPasswordText;
+
+
   @override
   void dispose() {
-    super.dispose();
     _emailController.dispose();
     _passwordController.dispose();
+    super.dispose();
   }
 
   @override
