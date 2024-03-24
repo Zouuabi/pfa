@@ -41,7 +41,7 @@ class RegisterForm extends StatelessWidget {
           children: [
             Expanded(
               child: MyTextField(
-                  label: 'enter your username',
+                  label: 'Username',
                   hintText: 'username',
                   controller: _usernameController,
                   errorText: usernameErrorText),
@@ -51,7 +51,7 @@ class RegisterForm extends StatelessWidget {
             ),
             Expanded(
                 child: MyTextField(
-                    label: 'enter your contact number',
+                    label: 'Contact number',
                     hintText: 'contact number',
                     controller: _contactNumberController,
                     errorText: contactErrorText))
