@@ -1,26 +1,44 @@
 import 'package:flutter/material.dart';
-import 'package:mobile/core/config/image_manager.dart';
+
 import 'package:mobile/core/helper/email_checker.dart';
+import 'package:mobile/presentation/login/widgets/longin_form.dart';
+import 'package:mobile/presentation/login/widgets/no_account.dart';
+import 'package:mobile/presentation/login/widgets/social_login.dart';
 import 'package:mobile/presentation/shared/app_welcome.dart';
 import 'package:mobile/presentation/shared/my_button.dart';
-import 'package:mobile/presentation/shared/my_text_field.dart';
 
-class LoginPage extends StatefulWidget {
-  const LoginPage({
+class LoginPage extends StatelessWidget {
+  const LoginPage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        if (constraints.maxWidth < 500) {
+          return const Scaffold(body: SafeArea(child: MobileView()));
+        } else {
+          return const WebView();
+        }
+      },
+    );
+  }
+}
+
+class MobileView extends StatefulWidget {
+  const MobileView({
     super.key,
   });
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  State<MobileView> createState() => _MobileViewState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _MobileViewState extends State<MobileView> {
   final TextEditingController _emailController = TextEditingController();
-  final TextEditingController  _passwordController= TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
 
   String? isEmailText;
   String? isPasswordText;
-
 
   @override
   void dispose() {
@@ -31,102 +49,102 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 50),
+      child: SingleChildScrollView(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const AppWelcome(child: 'Login'),
+            const SizedBox(height: 50),
+            const SocialLogin(),
+            const SizedBox(height: 50),
+            LoginForm(
+              emailController: _emailController,
+              isEmailText: isEmailText,
+              passwordController: _passwordController,
+              isPasswordText: isPasswordText,
+            ),
+            const SizedBox(height: 20),
+            Align(
+              alignment: Alignment.centerRight,
+              child: TextButton(
+                onPressed: () {},
+                child: const Text('Forgot Password ?'),
+              ),
+            ),
+            MyButton(
+              child: 'Login',
+              ontap: () {
+                bool isMatch = isEmailValid(email: _emailController.text);
+
+                if (isMatch) {
+                  Navigator.of(context).pushReplacementNamed('/navigation');
+                } else {
+                  // mehy valid
+                  setState(() {
+                    isEmailText = 'Email format non valid';
+                  });
+                }
+              },
+            ),
+            const NoAccount()
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class WebView extends StatefulWidget {
+  const WebView({super.key});
+
+  @override
+  State<WebView> createState() => _WebViewState();
+}
+
+class _WebViewState extends State<WebView> {
+  @override
+  Widget build(BuildContext context) {
+    Size screen = MediaQuery.sizeOf(context);
+
     return Scaffold(
-      body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 50),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.start,
+      body: Stack(
+        alignment: AlignmentDirectional.center,
+        children: [
+          Row(
             children: [
-              const AppWelcome(child: 'Login'),
-              const SizedBox(height: 50),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  ElevatedButton(
-                      onPressed: () {},
-                      child: Row(
-                        children: [
-                          Image.asset(
-                            ImageManager.google,
-                            height: 20,
-                            width: 20,
-                          ),
-                          const SizedBox(
-                            width: 10,
-                          ),
-                          const Text('Continue with Google')
-                        ],
-                      )),
-                  ElevatedButton(
-                      onPressed: () {},
-                      child: Image.asset(
-                        ImageManager.facebook,
-                        height: 20,
-                        width: 20,
-                      )),
-                  ElevatedButton(
-                      onPressed: () {},
-                      child: Image.asset(
-                        ImageManager.apple,
-                        height: 20,
-                        width: 20,
-                      )),
-                ],
-              ),
-              const SizedBox(height: 50),
-              MyTextField(
-                label: 'Enter you email address',
-                hintText: 'user@example.com',
-                controller: _emailController,
-                errorText: isEmailText,
-              ),
-              const SizedBox(height: 30),
-              MyTextField(
-                label: 'Enter you password',
-                hintText: '*********',
-                isPassword: true,
-                controller: _passwordController,
-                errorText: isPasswordText,
-              ),
-              const SizedBox(height: 20),
-              Align(
-                alignment: Alignment.centerRight,
-                child: TextButton(
-                  onPressed: () {},
-                  child: const Text('Forgot Password ?'),
+              Expanded(
+                child: Container(
+                  color: const Color.fromARGB(255, 0, 95, 85),
                 ),
               ),
-              MyButton(
-                child: 'Login',
-                ontap: () {
-                  bool isMatch = isEmailValid(email: _emailController.text);
-
-                  if (isMatch) {
-                    Navigator.of(context).pushReplacementNamed('/navigation');
-                  } else {
-                    // mehy valid
-                    setState(() {
-                      isEmailText = 'Email format non valid';
-                    });
-                  }
-                },
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const Text('No Account ? '),
-                  TextButton(
-                      onPressed: () {
-                        Navigator.of(context).pushNamed('/register');
-                      },
-                      child: const Text('Register'))
-                ],
+              Expanded(
+                child: Container(
+                  color: Colors.white,
+                ),
               )
             ],
           ),
-        ),
+          Container(
+            decoration: BoxDecoration(boxShadow: const [
+              BoxShadow(
+                  blurRadius: 7,
+                  spreadRadius: 0.5,
+                  color: Color.fromARGB(207, 184, 183, 183))
+            ], color: Colors.white, borderRadius: BorderRadius.circular(30)),
+            width: screen.width * 0.6,
+            height: screen.height * 0.9,
+            // ! rahi hethy hyela w meyjich hakka
+            // ? es3ll chat chpt tw ygolk
+            // todo : l todo dima safra
+            // hedhi commment aadya
+            //*** hedhi comment afta7 chway */
+            ////dsfdsfdsfdsfds
+            child: const MobileView(),
+          )
+        ],
       ),
     );
   }
