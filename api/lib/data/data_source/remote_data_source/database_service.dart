@@ -23,12 +23,17 @@ class DataBaseService {
 
   Future<void> _connect() async {
     try {
+      // _db = await Db.create(
+      //   'mongodb+srv://oubeid:CyJicctvRVTTSvPd@cluster0.uvkmspx.mongodb.net/?retryWrites=true&w=majority',
+      // );
       _db = await Db.create(
         'mongodb+srv://oubeid:CyJicctvRVTTSvPd@cluster0.uvkmspx.mongodb.net/?retryWrites=true&w=majority',
       );
 
       if (_db.isConnected) {
         await _db.open();
+      } else {
+        print('\n db is not connected \n');
       }
     } catch (e) {
       throw Exception(e.toString());

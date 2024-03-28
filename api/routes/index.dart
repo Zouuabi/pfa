@@ -1,18 +1,31 @@
-import 'package:api/data/data_source/remote_data_source/database_service.dart';
-import 'package:api/data/models/models.dart';
-import 'package:api/data/repositories/user/user_repository_impl.dart';
+import 'dart:io';
+import 'dart:convert';
+import 'package:api/src/data/repositories/user_repository/user_repository.dart';
+import 'package:api/src/data/repositories/user_repository/user_repository_impl.dart';
+import 'package:api/src/models/login_response.dart';
 import 'package:dart_frog/dart_frog.dart';
 
-Response onRequest(RequestContext context) {
-  UserRepositoryImpl(db: DataBaseService()).createUser(
-    User(
-      id: 'id',
-      userName: '',
-      firstName: '',
-      lastName: '',
-      email: 'email',
-      tel: 'tel',
-    ),
-  );
-  return Response(body: 'Welcome to TeamBey');
+Future<Response> onRequest(RequestContext context) async {
+  UserRepository _repo = UserRepositoryImpl();
+
+  final body = context.request.body();
+  final myMap;
+
+  try {
+    myMap = jsonEncode(body) as Map<String, dynamic>;
+  } catch (e) {
+    return Response.json(statusCode: HttpStatus.badRequest);
+  }
+
+  final String? email = myMap['email'];
+  final String? password = myMap['password'];
+
+  if (email == null || password == null) {
+    return Response.json(statusCode: HttpStatus.badRequest);
+  }
+
+  final LoginResponse response =
+      await _repo.login(email: email, password: password);
+
+  return Response.json(statusCode: HttpStatus.ok, body: response.tojson());
 }
