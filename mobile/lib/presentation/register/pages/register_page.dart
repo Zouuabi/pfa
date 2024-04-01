@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mobile/core/helper/email_checker.dart';
 import 'package:mobile/core/helper/password_checker.dart';
-import 'package:mobile/presentation/register/verify/contact_number_checker.dart';
+import 'package:mobile/core/helper/contact_number_checker.dart';
 import 'package:mobile/presentation/register/widgets/have_account.dart';
 import 'package:mobile/presentation/register/widgets/register_form.dart';
 import 'package:mobile/presentation/shared/app_welcome.dart';
@@ -111,7 +111,7 @@ class _MobileViewState extends State<MobileView> {
                   });
                 }
                 if (!error) {
-                  Navigator.of(context).pushReplacementNamed('/navigation');
+                  Navigator.of(context).pushReplacementNamed('/gender');
                 }
               },
             ),

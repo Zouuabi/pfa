@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:mobile/presentation/navigation/navigation_page.dart';
+import 'package:mobile/presentation/register/pages/birthday_page.dart';
+import 'package:mobile/presentation/register/pages/gender_page.dart';
+import 'package:mobile/presentation/register/pages/prefrences_page.dart';
 import 'package:mobile/presentation/register/pages/register_page.dart';
 
 import 'login/pages/login_page.dart';
@@ -16,11 +19,14 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.teal),
         useMaterial3: true,
       ),
-      initialRoute: '/login',
+      initialRoute: '/gender',
       routes: {
         '/login': (BuildContext context) => const LoginPage(),
         '/register': (BuildContext context) => const RegisterPage(),
         '/navigation': (BuildContext context) => const NavigationPage(),
+        '/gender': (BuildContext context) => const GenderPage(),
+        '/birthday': (BuildContext context) => const BirthdayPage(),
+        PrefrencesPage.route: (BuildContext context) => const PrefrencesPage(),
       },
     );
   }
