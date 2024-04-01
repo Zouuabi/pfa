@@ -14,7 +14,7 @@ class LoginPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return LayoutBuilder(
       builder: (context, constraints) {
-        if (constraints.maxWidth < 500) {
+        if (constraints.maxWidth < 600) {
           return const Scaffold(body: SafeArea(child: MobileView()));
         } else {
           return const WebView();
@@ -136,12 +136,6 @@ class _WebViewState extends State<WebView> {
             ], color: Colors.white, borderRadius: BorderRadius.circular(30)),
             width: screen.width * 0.6,
             height: screen.height * 0.9,
-            // ! rahi hethy hyela w meyjich hakka
-            // ? es3ll chat chpt tw ygolk
-            // todo : l todo dima safra
-            // hedhi commment aadya
-            //*** hedhi comment afta7 chway */
-            ////dsfdsfdsfdsfds
             child: const MobileView(),
           )
         ],
