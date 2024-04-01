@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:mobile/core/helper/email_checker.dart';
 import 'package:mobile/core/helper/password_checker.dart';
 import 'package:mobile/presentation/register/verify/contact_number_checker.dart';
-import 'package:mobile/presentation/register/widgets/register_form.dart';
 import 'package:mobile/presentation/shared/app_welcome.dart';
 import '../../shared/shared.dart';
 
+/// todo : barrel file must be added to reduced number of imports
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});
 

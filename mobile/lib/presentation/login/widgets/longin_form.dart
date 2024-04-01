@@ -12,8 +12,8 @@ class LoginForm extends StatelessWidget {
         _passwordController = passwordController;
 
   final TextEditingController _emailController;
-  final String? isEmailText;
   final TextEditingController _passwordController;
+  final String? isEmailText;
   final String? isPasswordText;
 
   @override

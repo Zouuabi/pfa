@@ -1,13 +1,53 @@
 import 'package:api/src/data/data_source/remote/database_service.dart';
-import 'package:api/src/data/repositories/user_repository/user_repository.dart';
+import 'package:api/src/data/repositories/user/user_repository.dart';
 import 'package:api/src/data/models/user.dart';
 import 'package:api/src/models/login_response.dart';
+import 'package:dart_jsonwebtoken/dart_jsonwebtoken.dart';
 import 'package:mongo_dart/mongo_dart.dart';
 
 class UserRepositoryImpl implements UserRepository {
   UserRepositoryImpl();
 
   final DataBaseService dataBaseService = DataBaseService.instance();
+  String? generateToken({email, password}) {
+    final jwt = JWT(
+      {
+        'email': email,
+        'password': password,
+      },
+    );
+
+    return jwt.sign(SecretKey('123'));
+  }
+
+  User? verifyToken(String token) {
+    try {
+      final payload = JWT.verify(
+        token,
+        SecretKey('123'),
+      );
+
+      final payloadData = payload.payload as Map<String, dynamic>;
+
+      final email = payloadData['email'] as String;
+      return User(
+          username: 'username',
+          email: 'email',
+          phoneNumber: 'phoneNumber',
+          password: 'password');
+    } catch (e) {
+      return null;
+    }
+  }
+
+  User? findByEmailAndPassword(
+      {required String email, required String password}) {
+    return User(
+        username: 'username',
+        email: 'email',
+        phoneNumber: 'phoneNumber',
+        password: 'password');
+  }
 
   @override
   Future<LoginResponse> login(
