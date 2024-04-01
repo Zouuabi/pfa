@@ -28,7 +28,8 @@ class MyApp extends StatelessWidget {
         '/navigation': (BuildContext context) => const NavigationPage(),
         EditProfilePage.route: (BuildContext context) =>
             const EditProfilePage(),
-        AccountSettings.route: (BuildContext context) => const AccountSettings()
+        AccountSettings.route: (BuildContext context) =>
+            const AccountSettings(),
         '/gender': (BuildContext context) => const GenderPage(),
         '/birthday': (BuildContext context) => const BirthdayPage(),
         PrefrencesPage.route: (BuildContext context) => const PrefrencesPage(),

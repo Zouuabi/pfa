@@ -3,6 +3,7 @@ import 'package:mobile/core/helper/email_checker.dart';
 import 'package:mobile/core/helper/password_checker.dart';
 import 'package:mobile/core/helper/contact_number_checker.dart';
 import 'package:mobile/presentation/register/widgets/have_account.dart';
+import 'package:mobile/presentation/register/widgets/register_form.dart';
 import 'package:mobile/presentation/shared/app_welcome.dart';
 import '../../shared/shared.dart';
 
