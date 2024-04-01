@@ -17,7 +17,7 @@ class DataBaseService {
   Db? _myDb;
   static DataBaseService _inst = DataBaseService._internal();
 
-  get connection => _myDb;
+  Db? get connection => _myDb;
 
   void _connect() async {
     try {
