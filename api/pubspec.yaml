@@ -12,6 +12,7 @@ dependencies:
   dart_jsonwebtoken: ^2.13.0
   dartz: ^0.10.1
   mongo_dart: ^0.10.1
+  very_good_analysis: ^5.1.0
 
 dev_dependencies:
   mocktail: ^1.0.0

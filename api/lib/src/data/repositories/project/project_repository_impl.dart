@@ -1,18 +1,13 @@
 import 'package:api/src/data/repositories/project/project_repository.dart';
 
+///
 class ProjectRepositoryImpl implements ProjectRepositroy {
   @override
-  void create() {
-    // TODO: implement create
-  }
+  void create() {}
 
   @override
-  void read() {
-    // TODO: implement read
-  }
+  void read() {}
 
   @override
-  void update() {
-    // TODO: implement update
-  }
+  void update() {}
 }

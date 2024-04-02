@@ -1,6 +1,6 @@
 import 'package:mongo_dart/mongo_dart.dart';
 
-// design pattern singleton
+/// design pattern singleton
 
 class DataBaseService {
   /// Use this constructor the create an object from the [DataBaseService]
@@ -15,16 +15,20 @@ class DataBaseService {
   }
 
   Db? _myDb;
-  static DataBaseService _inst = DataBaseService._internal();
+  static final DataBaseService _inst = DataBaseService._internal();
 
+  ///
   Db? get connection => _myDb;
 
-  void _connect() async {
+  ///
+  Future<void> _connect() async {
     try {
       _myDb = await Db.create(
         'mongodb+srv://oubeid:CyJicctvRVTTSvPd@cluster0.uvkmspx.mongodb.net/teambey?retryWrites=true&w=majority',
       );
-    } catch (e) {}
+    } catch (e) {
+      ///
+    }
 
     if (_myDb != null) {
       await _myDb!.open();

@@ -16,7 +16,7 @@ FutureOr<Response> _onPost(RequestContext context) async {
   final Map<String, dynamic> body;
 
   try {
-    body = await context.request.json();
+    body = await context.request.json() as Map<String, dynamic>;
   } catch (_) {
     return Response(statusCode: HttpStatus.badRequest);
   }
@@ -28,9 +28,11 @@ FutureOr<Response> _onPost(RequestContext context) async {
     return Response(statusCode: HttpStatus.badRequest);
   }
 
-  return Response.json(body: {
-    'token': 'hgc',
-  });
+  return Response.json(
+    body: {
+      'token': 'hgc',
+    },
+  );
 }
 
 //   final body = await context.request.body();
