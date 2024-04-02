@@ -1,53 +1,20 @@
+import 'dart:async';
+import 'dart:io';
+
 import 'package:api/src/data/data_source/remote/database_service.dart';
 import 'package:api/src/data/repositories/user/user_repository.dart';
 import 'package:api/src/data/models/user.dart';
+import 'package:api/src/models/failure_response.dart';
 import 'package:api/src/models/login_response.dart';
-import 'package:dart_jsonwebtoken/dart_jsonwebtoken.dart';
+import 'package:api/src/models/register_response.dart';
+
 import 'package:mongo_dart/mongo_dart.dart';
+import 'package:dartz/dartz.dart';
 
 class UserRepositoryImpl implements UserRepository {
   UserRepositoryImpl();
 
   final DataBaseService dataBaseService = DataBaseService.instance();
-  String? generateToken({email, password}) {
-    final jwt = JWT(
-      {
-        'email': email,
-        'password': password,
-      },
-    );
-
-    return jwt.sign(SecretKey('123'));
-  }
-
-  User? verifyToken(String token) {
-    try {
-      final payload = JWT.verify(
-        token,
-        SecretKey('123'),
-      );
-
-      final payloadData = payload.payload as Map<String, dynamic>;
-
-      final email = payloadData['email'] as String;
-      return User(
-          username: 'username',
-          email: 'email',
-          phoneNumber: 'phoneNumber',
-          password: 'password');
-    } catch (e) {
-      return null;
-    }
-  }
-
-  User? findByEmailAndPassword(
-      {required String email, required String password}) {
-    return User(
-        username: 'username',
-        email: 'email',
-        phoneNumber: 'phoneNumber',
-        password: 'password');
-  }
 
   @override
   Future<LoginResponse> login(
@@ -78,5 +45,33 @@ class UserRepositoryImpl implements UserRepository {
   }
 
   @override
-  void register({required User user}) {}
+  FutureOr<Either<Failure, RegisterResponse>> register(
+      {required User user}) async {
+    final Db? cnn = dataBaseService.connection;
+
+    if (cnn != null) {
+      await cnn.collection('user').insert(user.toJson());
+
+      return Right(
+          RegisterResponse(status: HttpStatus.created, data: user.toJson()));
+    } else {
+      return Left(Failure(
+          status: HttpStatus.internalServerError,
+          code: 'server-error',
+          message: 'Something went wrong on our side'));
+    }
+  }
 }
+
+// 1)  Objet =>Register succes
+// class RegisterResponse{
+// status : 200 ,
+// data : {
+// 'userName'
+// }
+// }
+// 2) Object => failure
+// Failure {
+  // status : sdfds
+  // errorMessage : weeksdfsd email not valid
+// }
