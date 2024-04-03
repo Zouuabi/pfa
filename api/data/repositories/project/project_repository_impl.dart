@@ -1,4 +1,4 @@
-import 'package:api/src/data/repositories/project/project_repository.dart';
+import 'project_repository.dart';
 
 class ProjectRepositoryImpl implements ProjectRepositroy {
   @override

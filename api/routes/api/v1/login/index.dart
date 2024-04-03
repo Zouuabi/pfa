@@ -2,6 +2,10 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:dart_frog/dart_frog.dart';
+import 'package:dartz/dartz.dart';
+
+import '../../../../models/failure_response.dart';
+import '../../../../models/login_response.dart';
 
 Future<Response> onRequest(RequestContext context) async {
   return switch (context.request.method) {
@@ -21,35 +25,8 @@ FutureOr<Response> _onPost(RequestContext context) async {
     return Response(statusCode: HttpStatus.badRequest);
   }
 
-  final email = body['email'] as String?;
-  final password = body['password'] as String?;
-
-  if (email == null || password == null) {
-    return Response(statusCode: HttpStatus.badRequest);
-  }
-
-  return Response.json(body: {
-    'token': 'hgc',
-  });
+  return Response.json(
+      body: context
+          .read<Either<Failure, LoginResponse>>()
+          .fold((l) => l.toJson(), (r) => r.toJson()));
 }
-
-//   final body = await context.request.body();
-//   final encodedBody = toJson(requestBody: body);
-
-//   if (encodedBody == null) {
-//     return Response.json(
-//         statusCode: HttpStatus.badRequest,
-//         body: {'message': 'Data must be in correct format (Json)'});
-//   }
-//   final String? email = encodedBody['email'];
-//   final String? password = encodedBody['password'];
-
-//   if (email == null || password == null) {
-//     return Response.json(statusCode: HttpStatus.badRequest);
-//   }
-
-//   final LoginResponse response =
-//       await _repo.login(email: email, password: password);
-
-//   return Response.json(statusCode: HttpStatus.ok, body: response.tojson());
-// }

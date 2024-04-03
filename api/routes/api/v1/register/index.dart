@@ -1,11 +1,11 @@
 import 'dart:async';
 import 'dart:io';
 
-import 'package:api/src/data/models/user.dart';
-import 'package:api/src/data/repositories/user/user_repository.dart';
-import 'package:api/src/data/repositories/user/user_repository_impl.dart';
-import 'package:api/src/models/failure_response.dart';
-import 'package:api/src/models/register_response.dart';
+import '../../../../data/models/user.dart';
+import '../../../../data/repositories/user/user_repository.dart';
+import '../../../../data/repositories/user/user_repository_impl.dart';
+import '../../../../models/failure_response.dart';
+import '../../../../models/register_response.dart';
 import 'package:dart_frog/dart_frog.dart';
 import 'package:dartz/dartz.dart';
 
