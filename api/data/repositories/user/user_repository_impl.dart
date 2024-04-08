@@ -73,7 +73,7 @@ class UserRepositoryImpl implements UserRepository {
       final Map<String, dynamic>? result;
       try {
         result =
-            await connection.collection('user').findOne({'username': email});
+            await connection.collection('user').findOne({'email': email});
       } catch (_) {
         return Left(Failure(
             status: HttpStatus.internalServerError,
