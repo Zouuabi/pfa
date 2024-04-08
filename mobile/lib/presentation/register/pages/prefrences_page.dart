@@ -1,7 +1,6 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:mobile/core/config/image_manager.dart';
 import 'package:mobile/presentation/register/widgets/my_text_button.dart';
 
 class PrefrencesPage extends StatefulWidget {
