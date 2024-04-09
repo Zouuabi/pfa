@@ -8,13 +8,17 @@ class AppWelcome extends StatelessWidget {
     return Column(children: [
       Text(
         'Welcome to TeamBey',
-        style: Theme.of(context).textTheme.titleSmall,
+        style: Theme.of(context)
+            .textTheme
+            .titleSmall!
+            .copyWith(fontSize: 20, fontWeight: FontWeight.w500),
       ),
       Text(
         child,
-        style: Theme.of(context).textTheme.titleLarge!.copyWith(
-              fontSize: 35,
-            ),
+        style: Theme.of(context)
+            .textTheme
+            .titleLarge!
+            .copyWith(fontSize: 35, fontWeight: FontWeight.bold),
       ),
     ]);
   }

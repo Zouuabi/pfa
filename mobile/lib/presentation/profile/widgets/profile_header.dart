@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mobile/presentation/profile/pages/account_settings.dart';
+import 'package:mobile/presentation/shared/profile_picture.dart';
 
 class ProfileHeader extends StatelessWidget {
   const ProfileHeader({super.key});
@@ -24,17 +25,7 @@ class ProfileHeader extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            SizedBox(
-              width: 60,
-              height: 60,
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(20),
-                child: Image.network(
-                  'https://www.oubeid.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fprofile-pic.52928098.png&w=384&q=75',
-                  fit: BoxFit.contain,
-                ),
-              ),
-            ),
+            ProfilePicture(),
             OutlinedButton(
                 onPressed: () {
                   Navigator.of(context).pushNamed('/edit-profile');
@@ -52,7 +43,7 @@ class ProfileHeader extends StatelessWidget {
           ],
         ),
         Text(
-          'Oubaied Allah Zouabi',
+          'Lina mahboult Safwen',
           style: Theme.of(context)
               .textTheme
               .titleLarge!
@@ -60,7 +51,7 @@ class ProfileHeader extends StatelessWidget {
         ),
         const SizedBox(height: 8),
         Text(
-          '@Zouuabi',
+          '@Lina_97',
           style: Theme.of(context)
               .textTheme
               .bodyMedium!
