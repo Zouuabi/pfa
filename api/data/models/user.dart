@@ -23,7 +23,7 @@ class User {
 
   // serialisation
   factory User.fromJson(Map<String, dynamic> json) => User(
-      id: json["id"],
+      id: json['id'],
       gender: json['gender'],
       interests: json['interests'],
       birthDay: json['birthDay'],

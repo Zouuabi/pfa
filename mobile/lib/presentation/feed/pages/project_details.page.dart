@@ -88,7 +88,47 @@ class ProjectDetailsPage extends StatelessWidget {
             Align(
                 alignment: Alignment.bottomRight,
                 child: ElevatedButton(
-                    onPressed: () {}, child: const Text('Request Join')))
+                    onPressed: () {
+                      showDialog(
+                          context: context,
+                          builder: (context) {
+                            return Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                SizedBox(
+                                  height: 150,
+                                  width: 300,
+                                  child: Card(
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceAround,
+                                        children: [
+                                          Center(
+                                            child: Text(
+                                              'Request has been sent to the team leader',
+                                              style: Theme.of(context)
+                                                  .textTheme
+                                                  .titleMedium,
+                                              textAlign: TextAlign.center,
+                                            ),
+                                          ),
+                                          TextButton(
+                                              onPressed: () {
+                                                Navigator.of(context).pop();
+                                              },
+                                              child: const Text('Okay'))
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                )
+                              ],
+                            );
+                          });
+                    },
+                    child: const Text('Request Join')))
           ],
         ),
       ),

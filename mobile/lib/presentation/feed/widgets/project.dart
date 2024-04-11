@@ -4,43 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:mobile/presentation/feed/pages/project_details.page.dart';
 import 'package:mobile/presentation/shared/profile_picture.dart';
 
-void func(context) {
-  showDialog(
-      context: context,
-      builder: (context) {
-        return Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            SizedBox(
-              height: 150,
-              width: 300,
-              child: Card(
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      Center(
-                        child: Text(
-                          'Request has been sent to the team leader',
-                          style: Theme.of(context).textTheme.titleMedium,
-                          textAlign: TextAlign.center,
-                        ),
-                      ),
-                      TextButton(
-                          onPressed: () {
-                            Navigator.of(context).pop();
-                          },
-                          child: const Text('Okay'))
-                    ],
-                  ),
-                ),
-              ),
-            )
-          ],
-        );
-      });
-}
+
 
 class Project extends StatefulWidget {
   const Project({

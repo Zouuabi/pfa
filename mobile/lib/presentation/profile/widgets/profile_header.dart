@@ -43,7 +43,7 @@ class ProfileHeader extends StatelessWidget {
           ],
         ),
         Text(
-          'Lina mahboult Safwen',
+          'Lina Memya',
           style: Theme.of(context)
               .textTheme
               .titleLarge!

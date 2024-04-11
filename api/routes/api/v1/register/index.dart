@@ -1,13 +1,14 @@
 import 'dart:async';
 import 'dart:io';
 
+import 'package:dart_frog/dart_frog.dart';
+import 'package:dartz/dartz.dart';
+
 import '../../../../data/models/user.dart';
 import '../../../../data/repositories/user/user_repository.dart';
 import '../../../../data/repositories/user/user_repository_impl.dart';
 import '../../../../models/failure_response.dart';
 import '../../../../models/register_response.dart';
-import 'package:dart_frog/dart_frog.dart';
-import 'package:dartz/dartz.dart';
 
 FutureOr<Response> onRequest(RequestContext context) {
   final request = context.request;
@@ -29,9 +30,9 @@ FutureOr<Response> onRequest(RequestContext context) {
 
 /// this is like doPost in servlet (like a controller in our case)
 FutureOr<Response> _onPost(RequestContext context) async {
-  final body;
+  final Map<String, dynamic> body;
   try {
-    body = await context.request.json();
+    body = await context.request.json() as Map<String, dynamic>;
   } catch (_) {
     /// this exeption occurs when [jsont()] fails to convert the body to json
     /// which means that the request body is mal formatted

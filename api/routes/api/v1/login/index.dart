@@ -20,7 +20,7 @@ FutureOr<Response> _onPost(RequestContext context) async {
   final Map<String, dynamic> body;
 
   try {
-    body = await context.request.json();
+    body = await context.request.json() as Map<String, dynamic>;
   } catch (_) {
     return Response(statusCode: HttpStatus.badRequest);
   }
