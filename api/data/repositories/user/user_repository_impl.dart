@@ -5,6 +5,7 @@ import 'package:dart_jsonwebtoken/dart_jsonwebtoken.dart';
 import 'package:dartz/dartz.dart';
 import 'package:mongo_dart/mongo_dart.dart';
 
+import '../../../config/collection.dart';
 import '../../../models/failure_response.dart';
 import '../../../models/login_response.dart';
 import '../../../models/register_response.dart';
@@ -72,7 +73,9 @@ class UserRepositoryImpl implements UserRepository {
     if (connection != null) {
       final Map<String, dynamic>? result;
       try {
-        result = await connection.collection('user').findOne({'email': email});
+        result = await connection
+            .collection(Collection.user)
+            .findOne({'email': email});
       } catch (_) {
         return Left(Failure(
             status: HttpStatus.internalServerError,
@@ -114,7 +117,7 @@ class UserRepositoryImpl implements UserRepository {
     final Db? cnn = dataBaseService.connection;
 
     if (cnn != null) {
-      await cnn.collection('user').insert(user.toJson());
+      await cnn.collection(Collection.user).insert(user.toJson());
 
       return Right(
           RegisterResponse(status: HttpStatus.created, data: user.toJson()));

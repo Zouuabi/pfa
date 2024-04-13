@@ -1,6 +1,6 @@
 import 'package:mongo_dart/mongo_dart.dart' show ObjectId;
 
-import '../../models/project.dart';
+import '../../models/projectz.dart';
 
 abstract class ProjectRepositroy {
   Future<void> create({required Projectz project});
