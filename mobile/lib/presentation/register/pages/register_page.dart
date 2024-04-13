@@ -1,4 +1,6 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:mobile/core/helper/email_checker.dart';
 import 'package:mobile/core/helper/password_checker.dart';
 import 'package:mobile/core/helper/contact_number_checker.dart';
@@ -16,7 +18,7 @@ class RegisterPage extends StatelessWidget {
     return LayoutBuilder(
       builder: (context, constraints) {
         if (constraints.maxWidth < 600) {
-          return const SafeArea(child: Scaffold(body: MobileView()));
+          return const Scaffold(body: SafeArea(child: MobileView()));
         } else {
           return const WebView();
         }
@@ -56,19 +58,25 @@ class _MobileViewState extends State<MobileView> {
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 50),
       child: SingleChildScrollView(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            const AppWelcome(child: 'Register'),
-            RegisterForm(
-              emailController: _emailController,
-              emailErrorText: emailErrorText,
-              usernameController: _usernameController,
-              usernameErrorText: usernameErrorText,
-              contactNumberController: _contactNumberController,
-              contactErrorText: contactErrorText,
-              passwordController: _passwordController,
-              passwordErrorText: passwordErrorText,
+            Align(
+                alignment: Alignment.topLeft,
+                child: const AppWelcome(child: 'Register')),
+            const SizedBox(height: 50),
+            SizedBox(
+              height: MediaQuery.sizeOf(context).height * 0.35,
+              child: RegisterForm(
+                emailController: _emailController,
+                emailErrorText: emailErrorText,
+                usernameController: _usernameController,
+                usernameErrorText: usernameErrorText,
+                contactNumberController: _contactNumberController,
+                contactErrorText: contactErrorText,
+                passwordController: _passwordController,
+                passwordErrorText: passwordErrorText,
+              ),
             ),
+            const SizedBox(height: 30),
             MyButton(
               child: 'Register',
               ontap: () {

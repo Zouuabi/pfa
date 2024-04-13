@@ -13,13 +13,19 @@ class BirthdayPage extends StatelessWidget {
             onPressed: () {
               Navigator.of(context).pop();
             },
-            icon: const Icon(Icons.arrow_back)),
+            icon: const Icon(Icons.arrow_back_ios)),
         actions: [
           TextButton(
             onPressed: () {
               Navigator.of(context).pushNamed(PrefrencesPage.route);
             },
-            child: const Text('next'),
+            child: Text(
+              'Next',
+              style: Theme.of(context)
+                  .textTheme
+                  .titleMedium!
+                  .copyWith(color: Colors.teal, fontWeight: FontWeight.bold),
+            ),
           )
         ],
       ),

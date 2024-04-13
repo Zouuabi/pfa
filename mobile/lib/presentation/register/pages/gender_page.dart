@@ -11,7 +11,6 @@ class GenderPage extends StatefulWidget {
 }
 
 class _GenderPageState extends State<GenderPage> {
-  String? _gender;
   Color color1 = grey;
   Color color2 = grey;
   String? textError;
@@ -35,7 +34,13 @@ class _GenderPageState extends State<GenderPage> {
                 });
               }
             },
-            child: const Text('next'),
+            child: Text(
+              'Next',
+              style: Theme.of(context)
+                  .textTheme
+                  .titleMedium!
+                  .copyWith(color: Colors.teal, fontWeight: FontWeight.bold),
+            ),
           )
         ],
       ),
