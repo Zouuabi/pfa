@@ -11,6 +11,7 @@ import '../../../models/login_response.dart';
 import '../../../models/register_response.dart';
 import '../../data_source/remote/database_service.dart';
 import '../../models/user.dart';
+import '../faillure_message.dart';
 import 'user_repository.dart';
 
 class UserRepositoryImpl implements UserRepository {
@@ -74,7 +75,7 @@ class UserRepositoryImpl implements UserRepository {
       final Map<String, dynamic>? result;
       try {
         result = await connection
-            .collection(Collection.user)
+            .collection(Collections.user)
             .findOne({'email': email});
       } catch (_) {
         return Left(Failure(
@@ -117,7 +118,7 @@ class UserRepositoryImpl implements UserRepository {
     final Db? cnn = dataBaseService.connection;
 
     if (cnn != null) {
-      await cnn.collection(Collection.user).insert(user.toJson());
+      await cnn.collection(Collections.user).insert(user.toJson());
 
       return Right(
           RegisterResponse(status: HttpStatus.created, data: user.toJson()));
@@ -128,12 +129,4 @@ class UserRepositoryImpl implements UserRepository {
       ));
     }
   }
-}
-
-class FailureMessage {
-  static const String serverError = 'server-error';
-  static const String userNotFound = 'no-user-found';
-  static const String wrongPassword = 'wrong-password';
-  static const String sessionExpired = 'session-expired';
-  static const String invalidToken = 'invalid-token';
 }

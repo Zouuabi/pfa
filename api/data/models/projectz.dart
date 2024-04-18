@@ -22,6 +22,7 @@ class Projectz {
   final String? id;
 
   /// includes owner name profile_url and id
+  /// !  must be changed to a map
   final User owner;
 
   /// the title of the project
@@ -39,7 +40,7 @@ class Projectz {
   final List<String>? keywords;
 
   /// date when the project is created
-  final DateTime createdAt;
+  final String createdAt;
 
   /// list of members id
   /// nullabe for the seek of preview in the feed screen
@@ -68,7 +69,7 @@ class Projectz {
       keywords: (json['keywords'] as List<dynamic>?)
           ?.map((e) => e as String)
           .toList(),
-      createdAt: DateTime.parse(json['createdAt'] as String),
+      createdAt: json['createdAt'],
       members:
           (json['members'] as List<dynamic>?)?.map((e) => e as String).toList(),
       roomId: json['roomId'] as String?,
@@ -85,7 +86,7 @@ class Projectz {
       'intro': intro,
       'description': description,
       'keywords': keywords,
-      'createdAt': createdAt.toIso8601String(),
+      'createdAt': createdAt,
       'members': members,
       'roomId': roomId,
       'likes': likes,

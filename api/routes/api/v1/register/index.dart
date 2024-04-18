@@ -10,6 +10,10 @@ import '../../../../data/repositories/user/user_repository_impl.dart';
 import '../../../../models/failure_response.dart';
 import '../../../../models/register_response.dart';
 
+/// Handles incoming requests.
+///
+/// This function is called whenever a request is made to the server.
+/// It validates the request method and delegates to the appropriate handler.
 FutureOr<Response> onRequest(RequestContext context) {
   final request = context.request;
 
@@ -28,37 +32,38 @@ FutureOr<Response> onRequest(RequestContext context) {
   }
 }
 
-/// this is like doPost in servlet (like a controller in our case)
+/// Handles POST requests.
+///
+/// This function is called when a POST request is made to the server.
+/// It parses the request body, creates a User object, and attempts to register the user.
 FutureOr<Response> _onPost(RequestContext context) async {
   final Map<String, dynamic> body;
   try {
+    // Try to parse the request body as JSON.
     body = await context.request.json() as Map<String, dynamic>;
   } catch (_) {
-    /// this exeption occurs when [jsont()] fails to convert the body to json
-    /// which means that the request body is mal formatted
-    ///
+    // If an error occurs (e.g., the request body is not valid JSON),
+    // return a 400 Bad Request response.
     return Response.json(statusCode: HttpStatus.badRequest, body: {
       'status': HttpStatus.badRequest,
-      'message': 'make sure the format of the body is correct',
+      'message': 'Make sure the format of the body is correct',
     });
   }
 
   try {
-    ///
+    // Try to create a User object from the request body.
     User user = User.fromJson(body);
 
-    ///
+    // Get the UserRepository.
     UserRepository _repo = UserRepositoryImpl();
 
-    ///
-    ///
+    // Try to register the user.
     final Either<Failure, RegisterResponse> result =
         await _repo.register(user: user);
 
-    /// here we are returning the result of the fold
-    /// being either a failure or a register response
-    ///
-    ///
+    // Return the result of the registration attempt.
+    // If the registration was successful, return a RegisterResponse.
+    // If the registration failed, return a Failure.
     return result.fold(
       (failure) {
         return Response.json(
@@ -71,9 +76,8 @@ FutureOr<Response> _onPost(RequestContext context) async {
       },
     );
   } catch (_) {
-    /// if the creation of the user fails
-    /// an exception will be thrown and wil be catched here
-    ///
+    // If an error occurs (e.g., the User object could not be created),
+    // return a 400 Bad Request response.
     return Response.json(statusCode: HttpStatus.badRequest, body: {
       'status': HttpStatus.badRequest,
       'message': 'Data in body is not correct',

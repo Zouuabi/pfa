@@ -1,8 +1,10 @@
 import 'package:mongo_dart/mongo_dart.dart';
 
+import '../../../config/collection.dart';
 import '../../data_source/remote/database_service.dart';
 import '../../models/projectz.dart';
 import '../../models/user.dart';
+import '../faillure_message.dart';
 import 'project_repository.dart';
 
 class ProjectRepositoryImpl implements ProjectRepositroy {
@@ -13,33 +15,59 @@ class ProjectRepositoryImpl implements ProjectRepositroy {
 
     if (_db != null) {
       try {
-        final result = await _db.collection('project').insert(project.toJson());
+        final result = await _db
+            .collection(Collections.project)
+            .insertOne(project.toJson());
+        if (result.nInserted == 0) {
+          throw Exception(FailureMessage.creationFailed);
+        }
       } catch (e) {
-        print(e.toString());
+        throw Exception(FailureMessage.serverError);
       }
+    } else {
+      throw Exception(FailureMessage.serverError);
     }
   }
 
   @override
-  Future<void> delete({required ObjectId id}) async {}
+  Future<void> delete({required String id}) async {
+    Db? _db = _dataBaseService.connection;
+
+    if (_db != null) {
+      try {
+        final result = await _db
+            .collection(Collections.project)
+            .deleteOne(where.id(ObjectId.fromHexString(id)));
+
+        if (result.nRemoved == 0) {
+          print('Document not deleted ');
+        } else {
+          print('Document deleted successfully');
+        }
+      } catch (e) {
+        print('An error occurred: $e');
+      }
+    } else {
+      throw (Exception());
+    }
+  }
 
   @override
-  Future<Projectz?> fetchById({required ObjectId id}) async {
-    return Projectz(
-        owner: User(
-            username: 'username',
-            phoneNumber: 'phoneNumber',
-            gender: 'gender',
-            birthDay: 'birthDay',
-            interests: [],
-            email: 'email',
-            password: 'password',
-            role: 'role'),
-        title: 'title',
-        intro: 'intro',
-        createdAt: DateTime.now().toUtc(),
-        likes: 0,
-        popularity: 0);
+  Future<Projectz?> fetchById({required String id}) async {
+    Db? _db = _dataBaseService.connection;
+
+    if (_db != null) {
+      final result = await _db
+          .collection(Collections.project)
+          .modernFindOne(selector: where.id(ObjectId.fromHexString(id)));
+      if (result != null) {
+        return Projectz.fromJson(result);
+      } else {
+        return null;
+      }
+    } else {
+      return null;
+    }
   }
 
   @override
@@ -49,6 +77,10 @@ class ProjectRepositoryImpl implements ProjectRepositroy {
 
   @override
   Future<List<Projectz>> fetchRelevantProjects() async {
+    final _db = _dataBaseService.connection;
+    if (_db != null) {
+      final result = await _db.collection(Collections.project).modernFind();
+    }
     return [];
   }
 
