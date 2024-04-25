@@ -43,48 +43,48 @@ class MobileView extends StatelessWidget {
       create: (context) => LoginCubit(),
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 50),
-        child: SingleChildScrollView(
-          child: BlocConsumer<LoginCubit, LoginState>(
-            listener: (context, state) {
-              if (state.status == Status.success) {
-                Navigator.of(context).pushReplacementNamed('/navigation');
-              } else if (state.status == Status.failed) {
-                showDialog(
-                    context: context,
-                    builder: (context) {
-                      return Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Container(
-                            color: Colors.white,
-                            height: 150,
-                            width: double.infinity,
-                            margin: const EdgeInsets.symmetric(horizontal: 20),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.spaceAround,
-                              children: [
-                                const Text('Error'),
-                                Text(state.data!),
-                                ElevatedButton(
-                                    onPressed: () {
-                                      Navigator.of(context).pop();
-                                    },
-                                    child: const Text('Try Again'))
-                              ],
-                            ),
-                          )
-                        ],
-                      );
-                    });
-              }
-            },
-            builder: (context, state) {
-              if (state.status == Status.loading) {
-                return const Center(
-                  child: CircularProgressIndicator(),
-                );
-              } else {
-                return Column(
+        child: BlocConsumer<LoginCubit, LoginState>(
+          listener: (context, state) {
+            if (state.status == Status.success) {
+              Navigator.of(context).pushReplacementNamed('/navigation');
+            } else if (state.status == Status.failed) {
+              showDialog(
+                  context: context,
+                  builder: (context) {
+                    return Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Container(
+                          color: Colors.white,
+                          height: 150,
+                          width: double.infinity,
+                          margin: const EdgeInsets.symmetric(horizontal: 20),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: [
+                              const Text('Error'),
+                              Text(state.data!),
+                              ElevatedButton(
+                                  onPressed: () {
+                                    Navigator.of(context).pop();
+                                  },
+                                  child: const Text('Try Again'))
+                            ],
+                          ),
+                        )
+                      ],
+                    );
+                  });
+            }
+          },
+          builder: (context, state) {
+            if (state.status == Status.loading) {
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
+            } else {
+              return SingleChildScrollView(
+                child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -116,10 +116,10 @@ class MobileView extends StatelessWidget {
                     ),
                     const NoAccount()
                   ],
-                );
-              }
-            },
-          ),
+                ),
+              );
+            }
+          },
         ),
       ),
     );

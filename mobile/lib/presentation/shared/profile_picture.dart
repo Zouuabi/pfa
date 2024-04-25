@@ -15,7 +15,7 @@ class ProfilePicture extends StatelessWidget {
         child: ClipRRect(
           borderRadius: BorderRadius.circular(20),
           child: Image.network(
-            'https://th.bing.com/th/id/R.42788fc1e7e7985e729bdd58c84c5bc6?rik=avNLSa8SbwjPcg&pid=ImgRaw&r=0',
+            'https://media.vogue.fr/photos/5ec2b66bc0c493adce32b318/4:3/w_1080,h_810,c_limit/sara-sampaio.jpg',
             fit: BoxFit.cover,
           ),
         ),

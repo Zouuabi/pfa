@@ -41,7 +41,7 @@ class _PrefrencesPageState extends State<PrefrencesPage> {
     );
   }
 
-  List<Widget> f() {
+  List<Widget> _getUi() {
     List<Widget> ret = [];
     for (String elt in data!['Prefrences']) {
       ret.add(Intrest(
@@ -79,7 +79,7 @@ class _PrefrencesPageState extends State<PrefrencesPage> {
                 child: GridView(
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 2, childAspectRatio: 5),
-                  children: f(),
+                  children: _getUi(),
                 ),
               ));
   }
