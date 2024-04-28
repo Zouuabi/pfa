@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:dart_frog/dart_frog.dart';
 import 'package:dartz/dartz.dart';
 
+import '../../../../data/repositories/user/user_repository_impl.dart';
 import '../../../../models/failure_response.dart';
 import '../../../../models/login_response.dart';
 
@@ -37,9 +38,18 @@ FutureOr<Response> _onPost(RequestContext context) async {
     return Response(statusCode: HttpStatus.badRequest);
   }
 
+  if (body['email'] == null || body['password'] == null) {
+    return Response(statusCode: HttpStatus.badRequest);
+  }
+  final repo = context.read<UserRepositoryImpl>();
+
+  // return Response.json(body: {
+  //   "email": body["email"],
+  //   "password": body["password"],
+  // });
   // Attempt to log in the user and get the response
-  final Either<Failure, LoginResponse> loginResult =
-      context.read<Either<Failure, LoginResponse>>();
+  final Either<Failure, LoginResponse> loginResult = await repo
+      .fetchFromCredentials(email: body['email'], password: body['password']);
 
   // Convert the login result to JSON and return it in the response
   return Response.json(

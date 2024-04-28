@@ -22,8 +22,8 @@ class UserRepositoryImpl implements UserRepository {
     final jwt = JWT(
       {
         'id': user.id,
-        'role': 'individual',
-        'email': 'user@example.com',
+        'role': user.role,
+        'email': user.email,
       },
     );
     return jwt.sign(SecretKey('Doudy2k23!'), expiresIn: Duration(days: 7));
@@ -88,9 +88,13 @@ class UserRepositoryImpl implements UserRepository {
             status: HttpStatus.notFound, message: FailureMessage.userNotFound));
       } else {
         User user = User.fromJson(result);
+        ObjectId userId = result['_id'] as ObjectId;
+
+        user.id = userId.oid;
         if (user.password == password) {
           String _token = generateToken(user: user);
           return Right(LoginResponse(
+              id: user.id,
               username: user.username,
               phoneNumber: user.birthDay,
               gender: user.birthDay,

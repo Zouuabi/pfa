@@ -11,15 +11,15 @@ class User {
     required this.role,
   });
 
-  final String? id;
+  String? id;
   final String role;
   final String username;
   final String email;
   final String phoneNumber;
-  final String gender;
-  final String birthDay;
-  final List<dynamic> interests;
-  final String password;
+  final String? gender;
+  final String? birthDay;
+  final List<dynamic>? interests;
+  final String? password;
 
   // serialisation
   factory User.fromJson(Map<String, dynamic> json) => User(

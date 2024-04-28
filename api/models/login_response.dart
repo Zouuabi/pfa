@@ -12,13 +12,13 @@ class LoginResponse {
   });
 
   final String? id;
-  final String role;
-  final String username;
-  final String email;
-  final String phoneNumber;
-  final String gender;
-  final String birthDay;
-  final List<dynamic> interests;
+  final String? role;
+  final String? username;
+  final String? email;
+  final String? phoneNumber;
+  final String? gender;
+  final String? birthDay;
+  final List<dynamic>? interests;
   final String token;
 
   factory LoginResponse.fromJson(Map<String, dynamic> json) => LoginResponse(
