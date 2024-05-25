@@ -77,10 +77,9 @@ class UserRepositoryImpl implements UserRepository {
         result = await connection
             .collection(Collections.user)
             .findOne({'email': email});
-      } catch (_) {
+      } catch (e) {
         return Left(Failure(
-            status: HttpStatus.internalServerError,
-            message: FailureMessage.serverError));
+            status: HttpStatus.internalServerError, message: e.toString()));
       }
 
       if (result == null) {
@@ -112,7 +111,7 @@ class UserRepositoryImpl implements UserRepository {
     } else {
       return Left(Failure(
           status: HttpStatus.internalServerError,
-          message: FailureMessage.serverError));
+          message: "connection me fammech"));
     }
   }
 
