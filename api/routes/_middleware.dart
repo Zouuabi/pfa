@@ -6,7 +6,7 @@ Handler middleware(Handler handler) {
         fromShelfMiddleware(
           shelf.corsHeaders(
             headers: {
-              shelf.ACCESS_CONTROL_ALLOW_ORIGIN: 'pfa.globeapp.dev',
+              shelf.ACCESS_CONTROL_ALLOW_ORIGIN: 'https://pfa.globeapp.dev',
             },
           ),
         ),
