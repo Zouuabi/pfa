@@ -79,8 +79,7 @@ class UserRepositoryImpl implements UserRepository {
             .findOne({'email': email});
       } on MongoDartError catch (e) {
         return Left(Failure(
-            status: HttpStatus.internalServerError,
-            message: e.mongoCode.toString() + 'sddfsdfs' + e.message));
+            status: HttpStatus.internalServerError, message: e.message));
       }
 
       if (result == null) {

@@ -8,7 +8,10 @@ import '../faillure_message.dart';
 import 'project_repository.dart';
 
 class ProjectRepositoryImpl implements ProjectRepositroy {
-  final DataBaseService _dataBaseService = DataBaseService.instance();
+  final DataBaseService _dataBaseService;
+
+  ProjectRepositoryImpl({required DataBaseService dataBaseService})
+      : _dataBaseService = dataBaseService;
   @override
   Future<void> create({required Projectz project}) async {
     Db? _db = _dataBaseService.connection;

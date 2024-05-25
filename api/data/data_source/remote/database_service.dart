@@ -24,9 +24,7 @@ class DataBaseService {
       _myDb = await Db.create(
         'mongodb+srv://oubeid:CyJicctvRVTTSvPd@cluster0.uvkmspx.mongodb.net/teambey?retryWrites=true&w=majority',
       );
-    } catch (e) {
-      print('--------------------------------${e.toString()}');
-    }
+    } catch (e) {}
 
     if (_myDb != null) {
       await _myDb!.open();
