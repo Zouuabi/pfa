@@ -15,9 +15,9 @@ import '../faillure_message.dart';
 import 'user_repository.dart';
 
 class UserRepositoryImpl implements UserRepository {
-  UserRepositoryImpl();
+  UserRepositoryImpl({required this.dataBaseService});
 
-  final DataBaseService dataBaseService = DataBaseService.instance();
+  final DataBaseService dataBaseService;
   String generateToken({required User user}) {
     final jwt = JWT(
       {
@@ -77,9 +77,10 @@ class UserRepositoryImpl implements UserRepository {
         result = await connection
             .collection(Collections.user)
             .findOne({'email': email});
-      } catch (e) {
+      } on MongoDartError catch (e) {
         return Left(Failure(
-            status: HttpStatus.internalServerError, message: e.toString()));
+            status: HttpStatus.internalServerError,
+            message: e.mongoCode.toString() + 'sddfsdfs' + e.message));
       }
 
       if (result == null) {

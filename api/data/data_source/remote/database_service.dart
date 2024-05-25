@@ -15,7 +15,7 @@ class DataBaseService {
   }
 
   Db? _myDb;
-  static DataBaseService _inst = DataBaseService._internal();
+  static final DataBaseService _inst = DataBaseService._internal();
 
   Db? get connection => _myDb;
 
@@ -24,7 +24,9 @@ class DataBaseService {
       _myDb = await Db.create(
         'mongodb+srv://oubeid:CyJicctvRVTTSvPd@cluster0.uvkmspx.mongodb.net/teambey?retryWrites=true&w=majority',
       );
-    } catch (e) {}
+    } catch (e) {
+      print('--------------------------------${e.toString()}');
+    }
 
     if (_myDb != null) {
       await _myDb!.open();
