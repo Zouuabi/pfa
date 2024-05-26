@@ -43,6 +43,7 @@ class _MobileViewState extends State<MobileView> {
   String? passwordErrorText;
   String? usernameErrorText;
   String? contactErrorText;
+
   @override
   void dispose() {
     _emailController.dispose();
@@ -59,9 +60,9 @@ class _MobileViewState extends State<MobileView> {
       child: SingleChildScrollView(
         child: Column(
           children: [
-            Align(
+            const Align(
                 alignment: Alignment.topLeft,
-                child: const AppWelcome(child: 'Register')),
+                child: AppWelcome(child: 'Register')),
             const SizedBox(height: 50),
             SizedBox(
               height: MediaQuery.sizeOf(context).height * 0.35,
@@ -120,7 +121,13 @@ class _MobileViewState extends State<MobileView> {
                   });
                 }
                 if (!error) {
-                  Navigator.of(context).pushReplacementNamed('/gender');
+                  Navigator.of(context)
+                      .pushReplacementNamed('/gender', arguments: {
+                    'email': _emailController.text,
+                    'password': _passwordController.text,
+                    'username': _usernameController.text,
+                    'phoneNumber': _contactNumberController.text,
+                  });
                 }
               },
             ),

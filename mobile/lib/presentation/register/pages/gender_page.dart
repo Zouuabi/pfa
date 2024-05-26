@@ -14,6 +14,7 @@ class _GenderPageState extends State<GenderPage> {
   Color color1 = grey;
   Color color2 = grey;
   String? textError;
+  String? selectedGender;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,8 +27,12 @@ class _GenderPageState extends State<GenderPage> {
         actions: [
           TextButton(
             onPressed: () {
+              final args = ModalRoute.of(context)!.settings.arguments
+                  as Map<String, dynamic>;
+              args['gender'] = selectedGender;
+
               if (color1 == teal || color2 == teal) {
-                Navigator.of(context).pushNamed('/birthday');
+                Navigator.of(context).pushNamed('/birthday', arguments: args);
               } else {
                 setState(() {
                   textError = "You must select your Gender";
@@ -60,6 +65,7 @@ class _GenderPageState extends State<GenderPage> {
             GenderButton(
                 child: 'Female',
                 ontap: () {
+                  selectedGender = 'female';
                   setState(() {
                     if (color1 == grey) {
                       color1 = teal;
@@ -77,6 +83,7 @@ class _GenderPageState extends State<GenderPage> {
             GenderButton(
                 child: 'Male',
                 ontap: () {
+                  selectedGender = 'male';
                   setState(() {
                     if (color2 == grey) {
                       color2 = teal;

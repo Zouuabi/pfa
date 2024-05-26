@@ -2,8 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:mobile/presentation/register/pages/prefrences_page.dart';
 
-class BirthdayPage extends StatelessWidget {
+class BirthdayPage extends StatefulWidget {
   const BirthdayPage({super.key});
+
+  @override
+  State<BirthdayPage> createState() => _BirthdayPageState();
+}
+
+class _BirthdayPageState extends State<BirthdayPage> {
+  DateTime birth = DateTime.now();
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +24,12 @@ class BirthdayPage extends StatelessWidget {
         actions: [
           TextButton(
             onPressed: () {
-              Navigator.of(context).pushNamed(PrefrencesPage.route);
+              final args = ModalRoute.of(context)!.settings.arguments
+                  as Map<String, dynamic>;
+              args['birthDay'] = birth.toString();
+
+              Navigator.of(context)
+                  .pushNamed(PrefrencesPage.route, arguments: args);
             },
             child: Text(
               'Next',
@@ -43,7 +55,9 @@ class BirthdayPage extends StatelessWidget {
                     mode: CupertinoDatePickerMode.date,
                     initialDateTime: DateTime(2000),
                     maximumDate: DateTime(2015),
-                    onDateTimeChanged: (val) {}))
+                    onDateTimeChanged: (val) {
+                      birth = val;
+                    }))
           ],
         ),
       ),

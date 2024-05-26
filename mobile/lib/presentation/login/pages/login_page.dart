@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import 'package:mobile/core/helper/email_checker.dart';
 import 'package:mobile/presentation/login/cubit/login_cubit.dart';
 import 'package:mobile/presentation/login/widgets/longin_form.dart';
@@ -8,7 +7,6 @@ import 'package:mobile/presentation/login/widgets/no_account.dart';
 import 'package:mobile/presentation/login/widgets/social_login.dart';
 import 'package:mobile/presentation/shared/app_welcome.dart';
 import 'package:mobile/presentation/shared/my_button.dart';
-
 import 'package:bloc/bloc.dart';
 
 class LoginPage extends StatelessWidget {
@@ -34,7 +32,6 @@ class MobileView extends StatelessWidget {
   });
 
   final TextEditingController _emailController = TextEditingController();
-
   final TextEditingController _passwordController = TextEditingController();
 
   @override

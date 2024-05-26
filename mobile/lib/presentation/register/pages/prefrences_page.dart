@@ -1,6 +1,8 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mobile/presentation/register/cubit/register_cubit.dart';
 import 'package:mobile/presentation/register/widgets/my_text_button.dart';
 
 class PrefrencesPage extends StatefulWidget {
@@ -57,30 +59,39 @@ class _PrefrencesPageState extends State<PrefrencesPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-          leading: IconButton(
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-              icon: const Icon(Icons.arrow_back)),
-          actions: [
-            TextButton(
-              onPressed: () {
-                Navigator.of(context).pushNamed('/prefrences');
-              },
-              child: const Text('next'),
-            )
-          ],
-        ),
-        body: isLoading
-            ? const Center(child: CircularProgressIndicator())
-            : SizedBox(
-                child: GridView(
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2, childAspectRatio: 5),
-                  children: _getUi(),
-                ),
-              ));
+    return BlocProvider(
+      create: (context) => RegisterCubit(),
+      child: Scaffold(
+          appBar: AppBar(
+            leading: IconButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                icon: const Icon(Icons.arrow_back)),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  final args = ModalRoute.of(context)!.settings.arguments
+                      as Map<String, dynamic>;
+                  args['interests'] = ['Flutter', 'Django', 'React'];
+                  args['role'] = 'individual';
+                  // Navigator.of(context).pushNamed('/prefrences');
+                  BlocProvider.of<RegisterCubit>(context).register(user: args);
+                },
+                child: const Text('next'),
+              )
+            ],
+          ),
+          body: isLoading
+              ? const Center(child: CircularProgressIndicator())
+              : SizedBox(
+                  child: GridView(
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 2, childAspectRatio: 5),
+                    children: _getUi(),
+                  ),
+                )),
+    );
   }
 }
