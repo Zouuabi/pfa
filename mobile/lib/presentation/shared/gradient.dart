@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class GenderButton extends StatelessWidget {
-  const GenderButton({
+class GradientButton extends StatelessWidget {
+  const GradientButton({
     super.key,
     required this.color,
     required this.child,

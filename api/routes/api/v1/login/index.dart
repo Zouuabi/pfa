@@ -41,7 +41,7 @@ FutureOr<Response> _onPost(RequestContext context) async {
   if (body['email'] == null || body['password'] == null) {
     return Response(statusCode: HttpStatus.badRequest);
   }
-  final repo = context.read<UserRepositoryImpl>();
+  final repo = await context.read<UserRepositoryImpl>();
 
   // return Response.json(body: {
   //   "email": body["email"],

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mobile/presentation/register/pages/role_page.dart';
 
 class NoAccount extends StatelessWidget {
   const NoAccount({
@@ -13,7 +14,7 @@ class NoAccount extends StatelessWidget {
         const Text('No Account ? '),
         TextButton(
             onPressed: () {
-              Navigator.of(context).pushNamed('/register');
+              Navigator.of(context).pushNamed(RolePage.route);
             },
             child: const Text('Register'))
       ],

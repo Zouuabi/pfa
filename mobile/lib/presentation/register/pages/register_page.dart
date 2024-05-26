@@ -121,8 +121,12 @@ class _MobileViewState extends State<MobileView> {
                   });
                 }
                 if (!error) {
+                  final args = ModalRoute.of(context)!.settings.arguments
+                      as Map<String, dynamic>;
+
                   Navigator.of(context)
                       .pushReplacementNamed('/gender', arguments: {
+                    'role': args['role'],
                     'email': _emailController.text,
                     'password': _passwordController.text,
                     'username': _usernameController.text,

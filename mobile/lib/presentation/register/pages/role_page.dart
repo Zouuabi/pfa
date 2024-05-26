@@ -3,18 +3,20 @@ import 'package:flutter/material.dart';
 import 'package:mobile/presentation/shared/gradient.dart';
 import 'package:mobile/presentation/shared/variables.dart';
 
-class GenderPage extends StatefulWidget {
-  const GenderPage({super.key});
+class RolePage extends StatefulWidget {
+  const RolePage({super.key});
+
+  static const String route = '/role';
 
   @override
-  State<GenderPage> createState() => _GenderPageState();
+  State<RolePage> createState() => _GenderPageState();
 }
 
-class _GenderPageState extends State<GenderPage> {
+class _GenderPageState extends State<RolePage> {
   Color color1 = grey;
   Color color2 = grey;
   String? textError;
-  String? selectedGender;
+  String? selectedRole;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,15 +29,12 @@ class _GenderPageState extends State<GenderPage> {
         actions: [
           TextButton(
             onPressed: () {
-              final args = ModalRoute.of(context)!.settings.arguments
-                  as Map<String, dynamic>;
-              args['gender'] = selectedGender;
-
               if (color1 == teal || color2 == teal) {
-                Navigator.of(context).pushNamed('/birthday', arguments: args);
+                Navigator.of(context)
+                    .pushNamed('/register', arguments: {'role': selectedRole});
               } else {
                 setState(() {
-                  textError = "You must select your Gender";
+                  textError = "You must select one";
                 });
               }
             },
@@ -56,16 +55,16 @@ class _GenderPageState extends State<GenderPage> {
               height: MediaQuery.sizeOf(context).height * 0.15,
             ),
             const Text(
-              'My Gender',
+              'Role',
               style: TextStyle(fontSize: 30),
             ),
             const SizedBox(
               height: 30,
             ),
             GradientButton(
-                child: 'Female',
+                child: 'Individual',
                 ontap: () {
-                  selectedGender = 'female';
+                  selectedRole = 'Individual';
                   setState(() {
                     if (color1 == grey) {
                       color1 = teal;
@@ -81,9 +80,9 @@ class _GenderPageState extends State<GenderPage> {
               height: 20,
             ),
             GradientButton(
-                child: 'Male',
+                child: 'Company',
                 ontap: () {
-                  selectedGender = 'male';
+                  selectedRole = 'Company';
                   setState(() {
                     if (color2 == grey) {
                       color2 = teal;

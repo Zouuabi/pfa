@@ -69,9 +69,8 @@ class UserRepositoryImpl implements UserRepository {
   @override
   FutureOr<Either<Failure, LoginResponse>> fetchFromCredentials(
       {required String email, required String password}) async {
-    final Db? connection = dataBaseService.connection;
-
-    if (connection != null) {
+    try {
+      final Db connection = await dataBaseService.connection;
       final Map<String, dynamic>? result;
       try {
         result = await connection
@@ -108,24 +107,24 @@ class UserRepositoryImpl implements UserRepository {
               message: FailureMessage.wrongPassword));
         }
       }
-    } else {
+    } catch (e) {
       return Left(Failure(
           status: HttpStatus.internalServerError,
-          message: "connection me fammech"));
+          message: "server error occured"));
     }
   }
 
   @override
   FutureOr<Either<Failure, RegisterResponse>> register(
       {required User user}) async {
-    final Db? cnn = dataBaseService.connection;
+    try {
+      final Db cnn = await dataBaseService.connection;
 
-    if (cnn != null) {
       await cnn.collection(Collections.user).insert(user.toJson());
 
       return Right(
           RegisterResponse(status: HttpStatus.created, data: user.toJson()));
-    } else {
+    } catch (e) {
       return Left(Failure(
         status: HttpStatus.internalServerError,
         message: FailureMessage.serverError,

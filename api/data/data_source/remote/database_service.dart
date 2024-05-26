@@ -10,24 +10,22 @@ class DataBaseService {
     return _inst;
   }
 
-  DataBaseService._internal() {
-    _connect();
-  }
+  DataBaseService._internal() {}
 
-  Db? _myDb;
   static final DataBaseService _inst = DataBaseService._internal();
 
-  Db? get connection => _myDb;
-
-  void _connect() async {
+  Future<Db> get connection async {
+    Db _myDb;
     try {
       _myDb = await Db.create(
         'mongodb+srv://oubeid:CyJicctvRVTTSvPd@cluster0.uvkmspx.mongodb.net/teambey?retryWrites=true&w=majority',
       );
-    } catch (e) {}
 
-    if (_myDb != null) {
-      await _myDb!.open();
+      await _myDb.open();
+
+      return _myDb;
+    } catch (e) {
+      throw Exception();
     }
   }
 }

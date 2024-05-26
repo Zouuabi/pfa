@@ -1,4 +1,3 @@
-import 'package:device_preview/device_preview.dart';
 import 'package:flutter/material.dart';
 import 'package:mobile/presentation/feed/pages/project_details.page.dart';
 import 'package:mobile/presentation/messages/pages/conversation_page.dart';
@@ -11,6 +10,7 @@ import 'package:mobile/presentation/register/pages/birthday_page.dart';
 import 'package:mobile/presentation/register/pages/gender_page.dart';
 import 'package:mobile/presentation/register/pages/prefrences_page.dart';
 import 'package:mobile/presentation/register/pages/register_page.dart';
+import 'package:mobile/presentation/register/pages/role_page.dart';
 
 import 'login/pages/login_page.dart';
 
@@ -21,8 +21,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      locale: DevicePreview.locale(context),
-      builder: DevicePreview.appBuilder,
+      // locale: DevicePreview.locale(context),
+      // builder: DevicePreview.appBuilder,
       title: 'Team Bey',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.teal),
@@ -47,6 +47,7 @@ class MyApp extends StatelessWidget {
             const PostProjectPage(),
         ProjectDetailsPage.route: (BuildContext context) =>
             const ProjectDetailsPage(),
+        RolePage.route: (BuildContext context) => const RolePage(),
       },
     );
   }

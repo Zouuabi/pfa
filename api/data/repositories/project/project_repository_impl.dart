@@ -14,9 +14,8 @@ class ProjectRepositoryImpl implements ProjectRepositroy {
       : _dataBaseService = dataBaseService;
   @override
   Future<void> create({required Projectz project}) async {
-    Db? _db = _dataBaseService.connection;
-
-    if (_db != null) {
+    try {
+      final Db _db = await _dataBaseService.connection;
       try {
         final result = await _db
             .collection(Collections.project)
@@ -27,50 +26,50 @@ class ProjectRepositoryImpl implements ProjectRepositroy {
       } catch (e) {
         throw Exception(FailureMessage.serverError);
       }
-    } else {
+    } catch (e) {
       throw Exception(FailureMessage.serverError);
     }
   }
 
   @override
   Future<void> delete({required String id}) async {
-    Db? _db = _dataBaseService.connection;
+    // Db? _db = _dataBaseService.connection;
 
-    if (_db != null) {
-      try {
-        final result = await _db
-            .collection(Collections.project)
-            .deleteOne(where.id(ObjectId.fromHexString(id)));
+    // if (_db != null) {
+    //   try {
+    //     final result = await _db
+    //         .collection(Collections.project)
+    //         .deleteOne(where.id(ObjectId.fromHexString(id)));
 
-        if (result.nRemoved == 0) {
-          print('Document not deleted ');
-        } else {
-          print('Document deleted successfully');
-        }
-      } catch (e) {
-        print('An error occurred: $e');
-      }
-    } else {
-      throw (Exception());
-    }
+    //     if (result.nRemoved == 0) {
+    //       print('Document not deleted ');
+    //     } else {
+    //       print('Document deleted successfully');
+    //     }
+    //   } catch (e) {
+    //     print('An error occurred: $e');
+    //   }
+    // } else {
+    //   throw (Exception());
+    // }
   }
 
   @override
   Future<Projectz?> fetchById({required String id}) async {
-    Db? _db = _dataBaseService.connection;
+    // Db? _db = _dataBaseService.connection;
 
-    if (_db != null) {
-      final result = await _db
-          .collection(Collections.project)
-          .modernFindOne(selector: where.id(ObjectId.fromHexString(id)));
-      if (result != null) {
-        return Projectz.fromJson(result);
-      } else {
-        return null;
-      }
-    } else {
-      return null;
-    }
+    // if (_db != null) {
+    //   final result = await _db
+    //       .collection(Collections.project)
+    //       .modernFindOne(selector: where.id(ObjectId.fromHexString(id)));
+    //   if (result != null) {
+    //     return Projectz.fromJson(result);
+    //   } else {
+    //     return null;
+    //   }
+    // } else {
+    //   return null;
+    // }
   }
 
   @override
@@ -80,10 +79,12 @@ class ProjectRepositoryImpl implements ProjectRepositroy {
 
   @override
   Future<List<Projectz>> fetchRelevantProjects() async {
-    final _db = _dataBaseService.connection;
-    if (_db != null) {
-      final result = await _db.collection(Collections.project).modernFind();
-    }
+    // final _db = _dataBaseService.connection;
+    // if (_db != null) {
+    //   final result = await _db.collection(Collections.project).modernFind();
+    //   // final query = where.textSearch('example');
+    //   // _db.collection(Collections.project).modernAggregate(pipeline)
+    // }
     return [];
   }
 

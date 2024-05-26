@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mobile/core/config/image_manager.dart';
 import 'package:mobile/presentation/feed/widgets/create_project.dart';
 import 'package:mobile/presentation/feed/widgets/project.dart';
-import 'package:mobile/presentation/messages/pages/messages_page.dart';
+
 import 'package:mobile/presentation/shared/search_barz.dart';
 
 class FeedPage extends StatefulWidget {
@@ -32,26 +32,37 @@ class _FeedPageState extends State<FeedPage> {
           toolbarHeight: 80,
           automaticallyImplyLeading: false,
           floating: true,
-          title: Row(children: [
-            const Expanded(flex: 4, child: SearchBarz()),
-            Expanded(
-                child: Card(
-              elevation: 6,
-              child: SizedBox(
-                height: 55,
-                child: GestureDetector(
-                    onTap: () {}, child: Image.asset(ImageManager.filter)),
-              ),
-            ))
-          ]),
+          title: Padding(
+            padding: EdgeInsets.symmetric(
+                horizontal: MediaQuery.sizeOf(context).width * 0.05),
+            child: Row(children: [
+              const Expanded(flex: 4, child: SearchBarz()),
+              Expanded(
+                  child: Card(
+                elevation: 6,
+                child: SizedBox(
+                  height: 55,
+                  child: GestureDetector(
+                      onTap: () {}, child: Image.asset(ImageManager.filter)),
+                ),
+              ))
+            ]),
+          ),
         ),
         SliverList.builder(
             itemCount: 10,
             itemBuilder: (context, index) {
+              final double width = MediaQuery.sizeOf(context).width;
+              final double margin = width > 600 ? width * 0.2 : 0;
+
               if (index == 0) {
-                return const CreateProject();
+                return Container(
+                    margin: EdgeInsets.symmetric(horizontal: margin),
+                    child: const CreateProject());
               }
-              return const Project();
+              return Container(
+                  margin: EdgeInsets.symmetric(horizontal: margin),
+                  child: const Project());
             })
       ],
     );
