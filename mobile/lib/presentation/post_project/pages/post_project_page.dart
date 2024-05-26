@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mobile/data/models/projectz.dart';
 import 'package:mobile/data/models/user.dart';
 import 'package:mobile/presentation/post_project/cubit/post_project_cubit.dart';
 import 'package:mobile/presentation/shared/my_text_field.dart';
@@ -33,7 +34,19 @@ class _PostProjectPageState extends State<PostProjectPage> {
             ),
             actions: [
               TextButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.of(context).pop(Projectz(
+                        id: 5,
+                        ownerName: 'Zouuabi',
+                        ownerPhoto:
+                            'https://www.oubeid.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fprofile-pic.52928098.png&w=640&q=75',
+                        title: _titleController.text,
+                        intro: _introductionController.text,
+                        description: _descriptionController.text,
+                        createdAt: 'Now',
+                        likes: 0,
+                        popularity: 0));
+                  },
                   child: Text(
                     'Post',
                     style: Theme.of(context).textTheme.titleMedium!.copyWith(
@@ -82,9 +95,12 @@ class _PostProjectPageState extends State<PostProjectPage> {
                 child: Column(
                   children: [
                     ListTile(
-                      leading: const ProfilePicture(),
+                      leading: const ProfilePicture(
+                        url:
+                            'https://www.oubeid.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fprofile-pic.52928098.png&w=640&q=75',
+                      ),
                       title: Text(
-                        'Lina_97',
+                        'Zouuabi',
                         style: Theme.of(context)
                             .textTheme
                             .titleSmall!
@@ -97,7 +113,7 @@ class _PostProjectPageState extends State<PostProjectPage> {
                     ),
                     MyTextField(
                       label: 'Title',
-                      hintText: '...',
+                      hintText: 'title',
                       controller: _titleController,
                       errorText: null,
                     ),
@@ -106,7 +122,7 @@ class _PostProjectPageState extends State<PostProjectPage> {
                     ),
                     MyTextField(
                       label: 'Intoduction',
-                      hintText: ' ...',
+                      hintText: 'your project intro',
                       controller: _introductionController,
                       errorText: null,
                     ),
@@ -115,35 +131,10 @@ class _PostProjectPageState extends State<PostProjectPage> {
                     ),
                     MyTextField(
                       label: 'Description',
-                      hintText: ' ...',
+                      hintText: 'Write description here',
                       controller: _descriptionController,
                       errorText: null,
                     ),
-                    ElevatedButton(
-                        onPressed: () {
-                          final args = ModalRoute.of(context)!
-                              .settings
-                              .arguments as User;
-                          final Map<String, dynamic> owner = {
-                            'id': args.id,
-                            'gender': args.gender,
-                            'interests': args.interests,
-                            'birthDay': args.birthDay,
-                            'username': args.username,
-                            'phoneNumber': args.phoneNumber,
-                            'role': args.role,
-                            'email': args.email,
-                            'password': null,
-                          };
-                          BlocProvider.of<PostProjectCubit>(context)
-                              .postProject(
-                                  title: _titleController.text,
-                                  introduction: _introductionController.text,
-                                  description: _descriptionController.text,
-                                  keywords: ['flutter', 'react'],
-                                  user: owner);
-                        },
-                        child: Text('oubeid'))
                   ],
                 ),
               );

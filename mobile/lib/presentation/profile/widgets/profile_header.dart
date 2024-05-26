@@ -25,7 +25,10 @@ class ProfileHeader extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            ProfilePicture(),
+            ProfilePicture(
+              url:
+                  'https://www.oubeid.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fprofile-pic.52928098.png&w=640&q=75',
+            ),
             OutlinedButton(
                 onPressed: () {
                   Navigator.of(context).pushNamed('/edit-profile');
@@ -43,7 +46,7 @@ class ProfileHeader extends StatelessWidget {
           ],
         ),
         Text(
-          'Lina Memya',
+          'Zouabi Oubeid',
           style: Theme.of(context)
               .textTheme
               .titleLarge!
@@ -51,7 +54,7 @@ class ProfileHeader extends StatelessWidget {
         ),
         const SizedBox(height: 8),
         Text(
-          '@Lina_97',
+          '@zouuabi',
           style: Theme.of(context)
               .textTheme
               .bodyMedium!

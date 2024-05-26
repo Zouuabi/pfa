@@ -13,11 +13,7 @@ class SearchBarz extends StatelessWidget {
       child: SearchAnchor.bar(
           dividerColor: Colors.teal,
           suggestionsBuilder: (_, __) {
-            return const [
-              ConversationItem(),
-              ConversationItem(),
-              ConversationItem(),
-            ];
+            return const [];
           }),
     );
   }

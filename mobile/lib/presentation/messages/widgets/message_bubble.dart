@@ -17,7 +17,11 @@ class MessageBubble extends StatelessWidget {
       mainAxisAlignment:
           data % 2 == 0 ? MainAxisAlignment.end : MainAxisAlignment.start,
       children: [
-        data % 2 == 0 ? Container() : const ProfilePicture(),
+        data % 2 == 0
+            ? Container()
+            : const ProfilePicture(
+                url: 'https://avatar.iran.liara.run/public/boy?username=Ash',
+              ),
         const SizedBox(width: 5),
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,

@@ -12,7 +12,9 @@ class ConversationPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: ListTile(
-          leading: const ProfilePicture(),
+          leading: const ProfilePicture(
+            url: 'https://avatar.iran.liara.run/public/boy?username=Ash',
+          ),
           title: const Text('User/Group Name'),
           trailing: IconButton(
               onPressed: () {

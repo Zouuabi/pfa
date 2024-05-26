@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:mobile/data/models/user.dart';
 
 import 'package:mobile/presentation/login/cubit/login_cubit.dart';
 import 'package:mobile/presentation/login/widgets/longin_form.dart';
@@ -43,8 +42,9 @@ class MobileView extends StatelessWidget {
         child: BlocConsumer<LoginCubit, LoginState>(
           listener: (context, state) {
             if (state.status == Status.success) {
-              Navigator.of(context).pushReplacementNamed('/navigation',
-                  arguments: state.data as User);
+              Navigator.of(context).pushReplacementNamed(
+                '/navigation',
+              );
             } else if (state.status == Status.failed) {
               showDialog(
                   context: context,

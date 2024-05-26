@@ -45,8 +45,6 @@ class MyApp extends StatelessWidget {
             const ConversationPage(),
         PostProjectPage.route: (BuildContext context) =>
             const PostProjectPage(),
-        ProjectDetailsPage.route: (BuildContext context) =>
-            const ProjectDetailsPage(),
         RolePage.route: (BuildContext context) => const RolePage(),
       },
     );

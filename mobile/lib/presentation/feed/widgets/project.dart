@@ -1,15 +1,28 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:mobile/data/models/projectz.dart';
 import 'package:mobile/presentation/feed/pages/project_details.page.dart';
 import 'package:mobile/presentation/shared/profile_picture.dart';
-
-
 
 class Project extends StatefulWidget {
   const Project({
     super.key,
+    required this.title,
+    required this.profileUrl,
+    required this.ago,
+    required this.intro,
+    required this.likes,
+    required this.userName,
+    required this.description,
   });
+  final String title;
+  final String userName;
+  final String profileUrl;
+  final String ago;
+  final String intro;
+  final int likes;
+  final String description;
 
   @override
   State<Project> createState() => _ProjectState();
@@ -18,14 +31,37 @@ class Project extends StatefulWidget {
 class _ProjectState extends State<Project> {
   // For Ui Testing
   bool isLiked = false;
-  int likes = Random().nextInt(900);
-  int comments = Random().nextInt(900);
-  int time = Random().nextInt(60);
+  late int likes;
+
+  @override
+  void initState() {
+    likes = widget.likes;
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.of(context).pushNamed(ProjectDetailsPage.route);
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => ProjectDetailsPage(
+                      project: Projectz(
+                        id: 1,
+                        ownerName: widget.userName,
+                        ownerPhoto: widget.profileUrl,
+                        title: widget.title,
+                        intro: widget.intro,
+                        description: widget.description,
+                        keywords: ['keyword1', 'keyword2'],
+                        createdAt: widget.ago,
+                        members: ['member1', 'member2'],
+                        roomId: 'room1',
+                        likes: likes,
+                        popularity: 0.8,
+                      ),
+                    )));
       },
       child: Card(
         elevation: 3,
@@ -36,21 +72,23 @@ class _ProjectState extends State<Project> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               ListTile(
-                leading: const ProfilePicture(),
+                leading: ProfilePicture(
+                  url: widget.profileUrl,
+                ),
                 title: Text(
-                  'Lina_97',
+                  widget.userName,
                   style: Theme.of(context)
                       .textTheme
                       .titleSmall!
                       .copyWith(fontWeight: FontWeight.bold),
                 ),
                 subtitle: Text(
-                  '$time min',
+                  widget.ago,
                   style: Theme.of(context).textTheme.bodySmall,
                 ),
               ),
               Text(
-                'TeamBey project - Collaboration platform',
+                widget.title,
                 style: Theme.of(context)
                     .textTheme
                     .titleMedium!
@@ -58,7 +96,7 @@ class _ProjectState extends State<Project> {
               ),
               const Divider(thickness: 0.5),
               Text(
-                'Teambey is  collaboration platform fostering a professional environment for project creation, team formation, and project management...',
+                widget.intro,
                 style: Theme.of(context).textTheme.bodyMedium,
                 textAlign: TextAlign.left,
               ),
@@ -88,20 +126,28 @@ class _ProjectState extends State<Project> {
                       style: Theme.of(context).textTheme.bodySmall,
                     )
                   ]),
-                  const SizedBox(width: 10),
-                  Row(children: [
-                    IconButton(
-                        onPressed: () {}, icon: const Icon(Icons.comment)),
-                    Text(
-                      '$comments',
-                      style: Theme.of(context).textTheme.bodySmall,
-                    )
-                  ]),
                   const Spacer(),
                   OutlinedButton(
                       onPressed: () {
-                        Navigator.of(context)
-                            .pushNamed(ProjectDetailsPage.route);
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => ProjectDetailsPage(
+                                      project: Projectz(
+                                        id: 1,
+                                        ownerName: widget.userName,
+                                        ownerPhoto: widget.profileUrl,
+                                        title: widget.title,
+                                        intro: widget.intro,
+                                        description: widget.description,
+                                        keywords: ['keyword1', 'keyword2'],
+                                        createdAt: widget.ago,
+                                        members: ['member1', 'member2'],
+                                        roomId: 'room1',
+                                        likes: likes,
+                                        popularity: 0.8,
+                                      ),
+                                    )));
                       },
                       child: const Text('View Details')),
                 ],

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
 class InterestsSection extends StatelessWidget {
-  const InterestsSection({super.key});
+  InterestsSection({super.key});
+
+  final List<String> interest = ['Flutter', 'React', 'Dart_Frog'];
 
   @override
   Widget build(BuildContext context) {
@@ -20,9 +22,11 @@ class InterestsSection extends StatelessWidget {
           height: 40,
           child: ListView.builder(
               scrollDirection: Axis.horizontal,
-              itemCount: 10,
+              itemCount: interest.length,
               itemBuilder: (context, index) {
-                return const Interest();
+                return Interest(
+                  interst: interest[index],
+                );
               }),
         ),
       ],
@@ -31,7 +35,8 @@ class InterestsSection extends StatelessWidget {
 }
 
 class Interest extends StatelessWidget {
-  const Interest({super.key});
+  const Interest({super.key, required this.interst});
+  final String interst;
 
   @override
   Widget build(BuildContext context) {
@@ -40,14 +45,14 @@ class Interest extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 10),
       decoration: BoxDecoration(
           color: Colors.grey[200], borderRadius: BorderRadius.circular(20)),
-      child: const Row(
+      child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          Icon(
+          const Icon(
             Icons.rocket,
             color: Colors.teal,
           ),
-          Text('Startup')
+          Text(interst)
         ],
       ),
     );

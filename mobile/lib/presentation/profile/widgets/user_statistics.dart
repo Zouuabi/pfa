@@ -9,9 +9,9 @@ class UserStatistics extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.start,
       children: const [
-        StatisticCount(number: 4560, label: 'Followers'),
+        StatisticCount(number: 2, label: 'Followers'),
         SizedBox(width: 50),
-        StatisticCount(number: 139, label: 'Projects'),
+        StatisticCount(number: 2, label: 'Projects'),
       ],
     );
   }

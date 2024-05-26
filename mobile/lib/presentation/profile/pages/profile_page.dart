@@ -7,20 +7,20 @@ class ProfilePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Padding(
-        padding: EdgeInsets.symmetric(horizontal: 20, vertical: 40),
+    return Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 40),
         child: SingleChildScrollView(
           child: Column(
             children: [
-              ProfileHeader(),
-              SizedBox(height: 20),
-              ProfileBio(),
-              SizedBox(height: 20),
-              UserStatistics(),
-              SizedBox(height: 20),
+              const ProfileHeader(),
+              const SizedBox(height: 20),
+              const ProfileBio(),
+              const SizedBox(height: 20),
+              const UserStatistics(),
+              const SizedBox(height: 20),
               InterestsSection(),
-              SizedBox(height: 20),
-              ExperienceSection(),
+              const SizedBox(height: 20),
+              const ExperienceSection(),
             ],
           ),
         ));

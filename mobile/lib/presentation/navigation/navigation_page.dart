@@ -28,7 +28,7 @@ class _NavigationPageState extends State<NavigationPage> {
           });
         },
         children: [
-          FeedPage(user: ModalRoute.of(context)!.settings.arguments as User),
+          FeedPage(),
           const NotificationPage(),
           const MessagesPage(),
           const ProfilePage(),

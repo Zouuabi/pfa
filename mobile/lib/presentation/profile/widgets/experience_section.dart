@@ -19,9 +19,9 @@ class ExperienceSection extends StatelessWidget {
         const SizedBox(height: 10),
         Container(
             margin: const EdgeInsets.only(left: 20),
-            height: 1000,
+            height: 250,
             child: ListView.builder(
-              itemCount: 10,
+              itemCount: 2,
               itemBuilder: (context, index) {
                 return Experience(
                   index: index,
@@ -60,20 +60,20 @@ class Experience extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'Project Name',
+                'Team Bey',
                 style: Theme.of(context)
                     .textTheme
                     .titleMedium!
                     .copyWith(fontWeight: FontWeight.bold),
               ),
               Text(
-                'Aug 2019 - Jul 2023',
+                '2024',
                 style: Theme.of(context)
                     .textTheme
                     .bodySmall!
                     .copyWith(color: Colors.grey),
               ),
-              const Text('This is the description of his participation\n'),
+              const Text('This is the description of participation\n'),
             ],
           ),
         ),
