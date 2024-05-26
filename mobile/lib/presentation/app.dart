@@ -4,7 +4,7 @@ import 'package:mobile/presentation/feed/pages/project_details.page.dart';
 import 'package:mobile/presentation/messages/pages/conversation_page.dart';
 import 'package:mobile/presentation/messages/pages/messages_page.dart';
 import 'package:mobile/presentation/navigation/navigation_page.dart';
-import 'package:mobile/presentation/post_project/post_project_page.dart';
+import 'package:mobile/presentation/post_project/pages/post_project_page.dart';
 import 'package:mobile/presentation/profile/pages/account_settings.dart';
 import 'package:mobile/presentation/profile/pages/edit_profile.dart';
 import 'package:mobile/presentation/register/pages/birthday_page.dart';

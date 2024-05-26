@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:mobile/core/config/image_manager.dart';
+import 'package:mobile/data/models/user.dart';
 import 'package:mobile/presentation/feed/widgets/create_project.dart';
 import 'package:mobile/presentation/feed/widgets/project.dart';
-import 'package:mobile/presentation/messages/pages/messages_page.dart';
 import 'package:mobile/presentation/shared/search_barz.dart';
 
 class FeedPage extends StatefulWidget {
   const FeedPage({
     super.key,
+    required this.user,
   });
-
+  final User user;
   @override
   State<FeedPage> createState() => _FeedPageState();
 }
@@ -49,7 +50,7 @@ class _FeedPageState extends State<FeedPage> {
             itemCount: 10,
             itemBuilder: (context, index) {
               if (index == 0) {
-                return const CreateProject();
+                return CreateProject(user: widget.user);
               }
               return const Project();
             })
