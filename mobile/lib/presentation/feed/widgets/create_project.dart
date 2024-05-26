@@ -1,17 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:mobile/presentation/post_project/post_project_page.dart';
+import 'package:mobile/data/models/user.dart';
+import 'package:mobile/presentation/post_project/pages/post_project_page.dart';
 import 'package:mobile/presentation/shared/profile_picture.dart';
 
 class CreateProject extends StatelessWidget {
   const CreateProject({
     super.key,
+    required this.user,
   });
+  final User user;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.of(context).pushNamed(PostProjectPage.route);
+        Navigator.of(context).pushNamed(PostProjectPage.route, arguments: user);
       },
       child: Card(
           elevation: 5,

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mobile/core/config/image_manager.dart';
+import 'package:mobile/data/models/user.dart';
 import 'package:mobile/presentation/feed/pages/feed_page.dart';
 import 'package:mobile/presentation/messages/pages/messages_page.dart';
 import 'package:mobile/presentation/notifications/notification_page.dart';
@@ -26,11 +27,11 @@ class _NavigationPageState extends State<NavigationPage> {
             currentIndex = index;
           });
         },
-        children: const [
-          FeedPage(),
-          NotificationPage(),
-          MessagesPage(),
-          ProfilePage(),
+        children: [
+          FeedPage(user: ModalRoute.of(context)!.settings.arguments as User),
+          const NotificationPage(),
+          const MessagesPage(),
+          const ProfilePage(),
         ],
       ),
       bottomNavigationBar: SalomonBottomBar(

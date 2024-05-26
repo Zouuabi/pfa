@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:mobile/core/helper/email_checker.dart';
+import 'package:mobile/data/models/user.dart';
+
 import 'package:mobile/presentation/login/cubit/login_cubit.dart';
 import 'package:mobile/presentation/login/widgets/longin_form.dart';
 import 'package:mobile/presentation/login/widgets/no_account.dart';
 import 'package:mobile/presentation/login/widgets/social_login.dart';
 import 'package:mobile/presentation/shared/app_welcome.dart';
 import 'package:mobile/presentation/shared/my_button.dart';
-import 'package:bloc/bloc.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
@@ -43,7 +43,8 @@ class MobileView extends StatelessWidget {
         child: BlocConsumer<LoginCubit, LoginState>(
           listener: (context, state) {
             if (state.status == Status.success) {
-              Navigator.of(context).pushReplacementNamed('/navigation');
+              Navigator.of(context).pushReplacementNamed('/navigation',
+                  arguments: state.data as User);
             } else if (state.status == Status.failed) {
               showDialog(
                   context: context,
