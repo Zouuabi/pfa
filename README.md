@@ -4,7 +4,7 @@ https://pfaweb-1febban-zouuabi.globeapp.dev/#/navigation
 
 ## Introduction
 
-TeamBey is a platform designed to connect young talents with relevant projects. It offers a work experience similar to the professional environment, while taking into account the specific needs of beginners. The main question we aim to answer is: How can we help young graduates and students gain professional experience despite recruiters' experience requirements?
+TeamBey is a platform designed to connect young talents  with relevant projects. It offers a work experience similar to the professional environment, while taking into account the specific needs of beginners. The main question we aim to answer is: How can we help young graduates and students gain professional experience despite recruiters' experience requirements?
 
 ## Features
 
