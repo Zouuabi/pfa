@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:dart_frog/dart_frog.dart';
 import 'package:dartz/dartz.dart';
 
+import '../../../../data/data_source/remote/database_service.dart';
 import '../../../../data/models/user.dart';
 import '../../../../data/repositories/user/user_repository.dart';
 import '../../../../data/repositories/user/user_repository_impl.dart';
@@ -55,7 +56,8 @@ FutureOr<Response> _onPost(RequestContext context) async {
     User user = User.fromJson(body);
 
     // Get the UserRepository.
-    UserRepository _repo = UserRepositoryImpl();
+    UserRepository _repo =
+        UserRepositoryImpl(dataBaseService: DataBaseService.instance());
 
     // Try to register the user.
     final Either<Failure, RegisterResponse> result =

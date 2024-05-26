@@ -51,13 +51,13 @@ FutureOr<Response> _onPost(RequestContext context) async {
   final Either<Failure, LoginResponse> loginResult = await repo
       .fetchFromCredentials(email: body['email'], password: body['password']);
 
+  late Response response;
+
+  loginResult.fold((l) {
+    response = Response.json(statusCode: 400, body: l.toJson());
+  }, (r) {
+    response = Response.json(statusCode: 200, body: r.toJson());
+  });
+  return response;
   // Convert the login result to JSON and return it in the response
-  return Response.json(
-    body: loginResult.fold(
-      (failure) =>
-          failure.toJson(), // If the login failed, return the failure details
-      (loginResponse) => loginResponse
-          .toJson(), // If the login succeeded, return the login response
-    ),
-  );
 }

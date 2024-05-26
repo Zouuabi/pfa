@@ -73,8 +73,8 @@ class Projectz {
       members:
           (json['members'] as List<dynamic>?)?.map((e) => e as String).toList(),
       roomId: json['roomId'] as String?,
-      likes: json['likes'] as int,
-      popularity: (json['popularity'] as num).toDouble(),
+      likes: json['likes'] ?? 0,
+      popularity: (json['popularity'] ?? 0.0 as num).toDouble(),
     );
   }
 

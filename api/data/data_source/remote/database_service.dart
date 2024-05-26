@@ -15,7 +15,7 @@ class DataBaseService {
   }
 
   Db? _myDb;
-  static DataBaseService _inst = DataBaseService._internal();
+  static final DataBaseService _inst = DataBaseService._internal();
 
   Db? get connection => _myDb;
 

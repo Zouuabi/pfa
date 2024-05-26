@@ -6,6 +6,27 @@ import 'package:dart_frog/dart_frog.dart';
 import '../../../../data/models/projectz.dart';
 import '../../../../data/repositories/project/project_repository.dart';
 
+// {
+//   "owner": {
+
+//       "role": "role",
+//       "username": "username",
+//       "gender": "gender",
+//       "birthDay": "birthDay",
+//       "phoneNumber": "phoneNumber",
+//       "interests": [],
+//       "email": "email",
+//       "password": "password"
+
+// 	},
+//       "title": "title",
+//       "intro": "intro",
+//       "description": "description",
+//       "keywords": [],
+//       "createdAt": "createdAt"
+
+// }
+
 /// Handles incoming requests to [api/v1/project].
 ///
 FutureOr<Response> onRequest(RequestContext context) async {
