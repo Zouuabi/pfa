@@ -9,5 +9,5 @@ abstract class ProjectRepositroy {
   Future<void> update({required ObjectId id});
   Future<void> delete({required String id});
   Future<List<Projectz>> fetchRelatedProjects();
-  Future<List<Projectz>> fetchRelevantProjects();
+  Future<List<Map<String, dynamic>>> fetchRelevantProjects();
 }

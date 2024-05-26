@@ -79,14 +79,29 @@ class ProjectRepositoryImpl implements ProjectRepositroy {
   }
 
   @override
-  Future<List<Projectz>> fetchRelevantProjects() async {
-    // final _db = _dataBaseService.connection;
-    // if (_db != null) {
-    //   final result = await _db.collection(Collections.project).modernFind();
-    //   // final query = where.textSearch('example');
-    //   // _db.collection(Collections.project).modernAggregate(pipeline)
-    // }
-    return [];
+  Future<List<Map<String, dynamic>>> fetchRelevantProjects() async {
+    try {
+      final Db _db = await _dataBaseService.connection;
+      final userPreferences = ['flutter', 'react'];
+      final searchQuery = {
+        '\$text': {
+          '\$search': userPreferences.join(' '),
+        },
+      };
+
+      final aggregationPipeline = [
+        {
+          '\$match': userPreferences.join(' '),
+        },
+      ];
+
+      final results =
+          await _db.collection(Collections.project).modernFind().toList();
+
+      return results;
+    } catch (e) {
+      throw Exception();
+    }
   }
 
   @override
