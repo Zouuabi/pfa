@@ -58,7 +58,9 @@ class _FeedPageState extends State<FeedPage> {
               final double margin = width > 600 ? width * 0.2 : 0;
 
               if (index == 0) {
-                return const CreateProject();
+                return CreateProject(
+                  user: widget.user,
+                );
               }
               return Container(
                   margin: EdgeInsets.symmetric(horizontal: margin),
